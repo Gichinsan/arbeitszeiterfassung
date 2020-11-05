@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>#{messages['pagetitle']}</title>
+</h:head>
+
+<h:body>
+    <h:form id="startPage">
+        <p:growl id="growl" showDetail="true" sticky="true"/>
+        <p:panel id="headerpanel" header="" style="margin-bottom:10px;">
+            <p:panelGrid columns="1">
+
+            </p:panelGrid>
+        </p:panel>
+        <div id="header" class="ui-g">
+            <p:panel id="panelLeft" header="#{messages['pagetitle']}" style="margin-bottom:10px;" columns="2">
+                <p:panelGrid columns="2">
+                    <h:outputLabel for="title" value="#{messages['title']}"/>
+                    <p:inputText id="title" value="#{dvd.title}" required="true" style="width:300px">
+                        <f:validateLength minimum="2"/>
+                    </p:inputText>
+
+                    <p:outputLabel for="genre" value="Genre: "/>
+                    <p:selectOneMenu id="genre" value="#{dvd.genreItem}" style="width:300px">
+                        <f:selectItem itemLabel="#{messages['selectGenre']}" itemValue="#" noSelectionOption="true"/>
+                        <f:selectItems value="#{genre.genreList}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="media" value="Medium: "/>
+                    <p:selectOneMenu id="media" value="#{dvd.mediaItem}" style="width:300px">
+                        <f:selectItem itemLabel="#{messages['selectMedia']}" itemValue="#" noSelectionOption="true"/>
+                        <f:selectItems value="#{media.mediaList}"/>
+                    </p:selectOneMenu>
+
+
+                    <p:commandButton action="#{dvd.saveAction}" value="#{messages['save']}" update="@form"
+                                     style="margin-right:20px;"
+                                     styleClass="ui-priority-primary" ajax="false">
+                        <p:resetInput target="panelLeft"/>
+                    </p:commandButton>
+                    <p:commandButton action="#{dvd.updateAction}" value="#{messages['update']}" update="@form"
+                                     ajax="true"
+                                     style="margin-right:10px;"
+                                     styleClass="ui-priority-primary">
+                        <p:resetInput target="panelLeft"/>
+                    </p:commandButton>
+
+                    <h:outputText value="#{messages['count']}"/>
+                    <h:outputText value="#{dvd.count}"/>
+
+                </p:panelGrid>
+            </p:panel>
+            <p:panel id="panelRight" header="Beschreibung">
+                <p:panelGrid>
+                    <p:inputTextarea value="#{dvd.descr}" rows="8" cols="85" autoResize="false" styleClass="ui-inputtextarea"/>
+                </p:panelGrid>
+            </p:panel>
+        </div>
+        <p:separator/>
+        <div>
+            <p:dataTable var="medium" value="#{dvd.dvdList}" selectionMode="single" rowKey="#{medium.id}"
+                         selection="#{dvd.selectedDvd}" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                         rowsPerPageTemplate="5,10,15"
+                         resizableColumns="true" liveResize="true" sortMode="simple">
+                <p:column headerText="#{messages['tbl.header.id']}" style="width:30px" sortBy="#{medium.id}">
+                    <h:outputText value="#{medium.id}"/>
+                </p:column>
+                <p:column headerText="#{messages['tbl.header.title']}" sortBy="#{medium.title}">
+                    <h:outputText value="#{medium.title}"/>
+                </p:column>
+                <p:column headerText="#{messages['tbl.header.genre']}" style="width:120px" sortBy="#{medium.genre}">
+                    <h:outputText value="#{medium.genre}"/>
+                </p:column>
+                <p:column headerText="#{messages['tbl.header.media']}" style="width:120px" sortBy="#{medium.medium}">
+                    <h:outputText value="#{medium.medium}"/>
+                </p:column>
+                <p:column headerText="#{messages['edit']}" style="width:60px">
+                    <p:commandButton id="selectRowBtn" process="@this" value="#{messages['edit']}" update="@form"
+                                     action="#{dvd.showSelectedDvd(medium)}"/>
+                </p:column>
+                <p:column headerText="#{messages['delete']}" style="width:60px">
+                    <p:commandButton id="deleteRowBtn" process="@this" value="#{messages['delete']}" update="@form"
+                                     action="#{dvd.deleteSelectedDvd(medium)}">
+                        <p:confirm header="#{messages['confirmation']}" message="#{messages['confirm.question']}"
+                                   icon="pi pi-exclamation-triangle"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </div>
+        <p:separator/>
+
+
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+            <p:commandButton value="#{messages['yes']}" type="button" styleClass="ui-confirmdialog-yes"
+                             icon="pi pi-check"/>
+            <p:commandButton value="#{messages['no']}" type="button" styleClass="ui-confirmdialog-no"
+                             icon="pi pi-times"/>
+        </p:confirmDialog>
+
+    </h:form>
+</h:body>
+</html>
