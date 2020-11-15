@@ -25,6 +25,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Service
 @Validated
 @RequiredArgsConstructor
@@ -37,4 +40,21 @@ public class WorkHoursService implements IWorkhoursService {
     public void save(Workhours workhours) {
         repository.save(workhours);
     }
+
+    @Override
+    public List<Workhours> getAllWorkinghours() {
+        return repository.findAll();
+    }
+
+    @Override
+    public List<Workhours> getWorkhoursByMonth(int month) {
+        return null;
+    }
+
+    @Override
+    public Workhours findWorkhoursByDate(LocalDate date) {
+        return repository.findWorkhoursByDate(date);
+    }
+
+
 }

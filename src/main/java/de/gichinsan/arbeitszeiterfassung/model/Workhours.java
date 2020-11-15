@@ -21,6 +21,7 @@ package de.gichinsan.arbeitszeiterfassung.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -32,14 +33,12 @@ public class Workhours {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private LocalDate date;
     private int startTimeHours;
     private int startTimeMinutes;
     private int stopTimeHours;
     private int stopTimeMinutes;
-    private Long startPauseHours;
-    private Long startPauseMinutes;
-    private Long stopPauseHours;
-    private Long stopPauseMinutes;
-
-    private Date date;
+    private int durationPauseHours;
+    private int durationPauseMinutes;
+    private String workingHours;
 }

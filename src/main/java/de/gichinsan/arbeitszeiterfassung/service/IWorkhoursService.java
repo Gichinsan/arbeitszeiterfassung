@@ -20,7 +20,16 @@ package de.gichinsan.arbeitszeiterfassung.service;
 
 import de.gichinsan.arbeitszeiterfassung.model.Workhours;
 
+import java.time.LocalDate;
+import java.util.List;
+
 public interface IWorkhoursService {
 
     void save(Workhours workhours);
+
+    List<Workhours> getAllWorkinghours();
+
+    List<Workhours> getWorkhoursByMonth(int month);
+
+    Workhours findWorkhoursByDate(LocalDate date);
 }
