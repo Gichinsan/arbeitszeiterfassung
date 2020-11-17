@@ -1,20 +1,18 @@
 /**
  * This file is part of arbeitszeiterfassung.
- *
+ * <p>
  * arbeitszeiterfassung is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
- *
+ * <p>
  * arbeitszeiterfassung is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- *
+ * <p>
  * You should have received a copy of the GNU General Public License along with
  * arbeitszeiterfassung. If not, see <http://www.gnu.org/licenses/>.
- *
- *
  */
 package de.gichinsan.arbeitszeiterfassung.service;
 
@@ -37,8 +35,15 @@ public class WorkHoursService implements IWorkhoursService {
     private ArbeitszeitRepository repository;
 
     @Override
-    public void save(Workhours workhours) {
-        repository.save(workhours);
+    public boolean save(Workhours workhours) {
+        //Check before save
+        var exists = repository.findWorkhoursByDate(workhours.getDate());
+        if (exists == null) {
+            repository.save(workhours);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -47,8 +52,8 @@ public class WorkHoursService implements IWorkhoursService {
     }
 
     @Override
-    public List<Workhours> getWorkhoursByMonth(int month) {
-        return null;
+    public List<Workhours> findWorkhoursByMonth(int month) {
+        return repository.findWorkhoursByMonth(month);
     }
 
     @Override

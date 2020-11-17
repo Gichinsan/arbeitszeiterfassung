@@ -25,11 +25,11 @@ import java.util.List;
 
 public interface IWorkhoursService {
 
-    void save(Workhours workhours);
+    boolean save(Workhours workhours);
 
     List<Workhours> getAllWorkinghours();
 
-    List<Workhours> getWorkhoursByMonth(int month);
+    List<Workhours> findWorkhoursByMonth(int month);
 
     Workhours findWorkhoursByDate(LocalDate date);
 }

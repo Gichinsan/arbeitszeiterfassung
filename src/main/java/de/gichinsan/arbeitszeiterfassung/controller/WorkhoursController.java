@@ -23,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
@@ -31,6 +32,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -49,9 +51,15 @@ public class WorkhoursController implements Serializable {
     private LocalTime pause;
     private String berechnung;
 
+    private Instant start;
+    private Instant stop;
+    private int minutes;
+    private int pauseRealTime;
 
     @Autowired
     private WorkHoursService service;
+
+
 
     @PostConstruct
     public void init() {
@@ -68,6 +76,9 @@ public class WorkhoursController implements Serializable {
         return "index";
     }
 
+    /**
+     * @return
+     */
     public String saveAction() {
 
         Duration duration = Duration.between(endZeit, startZeit);
@@ -91,20 +102,35 @@ public class WorkhoursController implements Serializable {
         wh.setDurationPauseHours(pause.getHour());
         wh.setDurationPauseMinutes(pause.getMinute());
         wh.setWorkingHours(realDiff);
-        service.save(wh);
-
-
-        return "/index?faces-redirect=true";
+        if (service.save(wh)) {
+            addMessage("Arbeitstag erfolgreich gespeichert");
+            return "/index";
+        } else {
+            addErrorMessage("Für diesen Tag exisiteren schon einträge! " + arbeitstag);
+            return "/index";
+        }
     }
 
+    @PostMapping(value = "/startPause")
     public String startPause() {
-        log.error(String.valueOf(System.currentTimeMillis()));
-        return "";
+        start = Instant.now();
+        return "/index";
     }
 
+    @PostMapping(value = "/stopPause")
     public String stopPause() {
-        log.error(String.valueOf(System.currentTimeMillis()));
-        return "";
+        stop = Instant.now();
+        Duration d = Duration.between(start, stop);
+        minutes = d.toMinutesPart();
+        return "/index";
+    }
+
+    public int getPauseRealTime() {
+        if (minutes > 0) {
+            return minutes;
+        } else {
+            return 0;
+        }
     }
 
     /**

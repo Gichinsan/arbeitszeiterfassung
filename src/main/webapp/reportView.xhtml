@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>#{messages['pagetitle']}</title>
+</h:head>
+
+<h:body>
+    <h:form id="reportViewPage">
+        <p:growl id="growl" showDetail="true" sticky="true" skipDetailIfEqualsSummary="true"/>
+        <p>
+            <h1>Arbeitszeiten</h1>
+        </p>
+
+        <p:dataTable var="rep" value="#{report.workinghours}" style="width:320px">
+            <p:column headerText="#{messages['tbl.header.id']}" style="width:15px">
+                <h:outputText value="#{rep.id}"/>
+            </p:column>
+            <p:column headerText="#{messages['tbl.header.date']}" style="width:30px">
+                <h:outputText value="#{rep.date}"/>
+            </p:column>
+            <p:column headerText="#{messages['tbl.header.workingHours']}" style="width:30px">
+                <h:outputText value="#{rep.workingHours}"/>
+            </p:column>
+        </p:dataTable>
+
+    </h:form>
+</h:body>
+</html>

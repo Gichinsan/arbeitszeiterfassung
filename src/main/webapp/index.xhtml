@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+>
 
 <h:head>
     <title>#{messages['pagetitle']}</title>
@@ -13,37 +13,44 @@
 <h:body>
     <h:form id="startPage">
         <p:growl id="growl" showDetail="true" sticky="true" skipDetailIfEqualsSummary="true"/>
+        <p>
+            <h1>#{messages['page.title.h1']}</h1>
+        </p>
         <h:panelGrid id="panel" columns="2" cellpadding="5">
 
-            <p:outputLabel for="button" value="Arbeitstag:"/>
-            <p:datePicker id="button" value="#{workhours.arbeitstag}" showIcon="true"/>
+            <p:outputLabel for="button" value="#{messages['label.workingday']}"/>
+            <p:datePicker id="button" value="#{workhours.arbeitstag}" showIcon="true" required="true"/>
 
-            <p:outputLabel for="Starttime" value="Start"/>
+            <p:outputLabel for="Starttime" value="#{messages['label.start']}"/>
             <p:outputPanel>
                 <p:datePicker id="Starttime" value="#{workhours.startZeit}" timeOnly="true"
-                              mindate="#{workhours.minTime}" maxdate="#{workhours.maxTime}"/>
-                (between
-                <h:outputText value="#{workhours.minTime}"></h:outputText>
-                and
-                <h:outputText value="#{workhours.maxTime}"></h:outputText>
-                )
+                              mindate="#{workhours.minTime}" maxdate="#{workhours.maxTime}" required="true"/>
+                <h:outputText value="#{messages['label.between']}"/>
+                <h:outputText value="#{workhours.minTime}"/>
+                <p:spacer width="5" height="10"/>
+                <h:outputText value="#{messages['label.and']}"/>
+                <p:spacer width="5" height="10"/>
+                <h:outputText value="#{workhours.maxTime}"/>
+                <h:outputText value="#{messages['label.closeBreak']}"/>
             </p:outputPanel>
 
-            <p:outputLabel for="pauseId" value="Pausenzeit"/>
-            <p:datePicker id="pauseId" value="#{workhours.pause}" timeOnly="true" pattern="HH:mm"/>
+            <p:outputLabel for="pauseId" value="#{messages['label.break']}"/>
+            <p:datePicker id="pauseId" value="#{workhours.pause}" timeOnly="true" pattern="HH:mm" required="true"/>
 
-            <p:outputLabel for="Endtime" value="Ende"/>
+            <p:outputLabel for="Endtime" value="#{messages['label.end']}"/>
             <p:outputPanel>
                 <p:datePicker id="Endtime" value="#{workhours.endZeit}" timeOnly="true"
-                              mindate="#{workhours.minTime}" maxdate="#{workhours.maxTime}"/>
-                (between
-                <h:outputText value="#{workhours.minTime}"></h:outputText>
-                and
-                <h:outputText value="#{workhours.maxTime}"></h:outputText>
-                )
+                              mindate="#{workhours.minTime}" maxdate="#{workhours.maxTime}" required="true"/>
+                <h:outputText value="#{messages['label.between']}"/>
+                <h:outputText value="#{workhours.minTime}"/>
+                <p:spacer width="5" height="10"/>
+                <h:outputText value="#{messages['label.and']}"/>
+                <p:spacer width="5" height="10"/>
+                <h:outputText value="#{workhours.maxTime}"/>
+                <h:outputText value="#{messages['label.closeBreak']}"/>
             </p:outputPanel>
 
-            <p:outputLabel for="berechnung" value="Arbeitszeit"/>
+            <p:outputLabel for="berechnung" value="#{messages['label.worktime']}"/>
             <h:outputText id="berechnung" value="#{workhours.berechnung}"/>
 
             <p:commandButton action="#{workhours.saveAction}" value="#{messages['save']}" update="@form"
@@ -53,14 +60,21 @@
             </p:commandButton>
         </h:panelGrid>
 
-        <p:separator />
+        <p:separator/>
 
+    </h:form>
+    <h:form id="pausePage">
+        <p>
+            <h1>#{messages['page.title.h1.pause']}</h1>
+        </p>
         <p:commandButton action="#{workhours.startPause}" value="#{messages['pauseStart']}" update="@this"
                          style="margin-right:20px;"
                          styleClass="ui-priority-primary" ajax="false"/>
         <p:commandButton action="#{workhours.stopPause}" value="#{messages['pauseStop']}" update="@this"
                          style="margin-right:20px;"
                          styleClass="ui-priority-primary" ajax="false"/>
+
+        <h:outputText value="#{workhours.pauseRealTime}"/>
     </h:form>
 </h:body>
 </html>
