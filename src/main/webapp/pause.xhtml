@@ -5,14 +5,15 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
 >
+
 <h:head>
     <title>#{messages['pagetitle']}</title>
 </h:head>
 
 <h:body>
-    <h:form id="reportViewPage">
+    <h:form id="startPage">
         <p:growl id="growl" showDetail="true" sticky="true" skipDetailIfEqualsSummary="true"/>
-        <p:tabMenu activeIndex="1">
+        <p:tabMenu activeIndex="2">
             <p:menuitem value="#{messages['menu.home']}" url="/" icon="pi pi-star">
             </p:menuitem>
             <p:menuitem value="#{messages['menu.reportView']}" outcome="/reportView" icon="pi pi-search">
@@ -23,21 +24,16 @@
             </p:menuitem>
         </p:tabMenu>
         <p>
-            <h1>#{messages['reportpage.title.h1']}</h1>
+            <h1>#{messages['page.title.h1.pause']}</h1>
         </p>
+        <p:commandButton action="#{pause.startPause}" value="#{messages['pauseStart']}" update="@this"
+                         style="margin-right:20px;"
+                         styleClass="ui-priority-primary" ajax="false"/>
+        <p:commandButton action="#{pause.stopPause}" value="#{messages['pauseStop']}" update="@this"
+                         style="margin-right:20px;"
+                         styleClass="ui-priority-primary" ajax="false"/>
 
-        <p:dataTable var="rep" value="#{report.workinghours}" style="width:320px">
-            <p:column headerText="#{messages['tbl.header.id']}" style="width:15px">
-                <h:outputText value="#{rep.id}"/>
-            </p:column>
-            <p:column headerText="#{messages['tbl.header.date']}" style="width:30px">
-                <h:outputText value="#{rep.date}"/>
-            </p:column>
-            <p:column headerText="#{messages['tbl.header.workingHours']}" style="width:30px">
-                <h:outputText value="#{rep.workingHours}"/>
-            </p:column>
-        </p:dataTable>
-
+        <h:outputText value="#{pause.pauseRealTime}"/>
     </h:form>
 </h:body>
 </html>

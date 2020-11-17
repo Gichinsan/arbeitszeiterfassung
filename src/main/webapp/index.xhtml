@@ -13,6 +13,16 @@
 <h:body>
     <h:form id="startPage">
         <p:growl id="growl" showDetail="true" sticky="true" skipDetailIfEqualsSummary="true"/>
+        <p:tabMenu activeIndex="0">
+            <p:menuitem value="#{messages['menu.home']}" url="/" icon="pi pi-star">
+            </p:menuitem>
+            <p:menuitem value="#{messages['menu.reportView']}" outcome="/reportView" icon="pi pi-search">
+            </p:menuitem>
+            <p:menuitem value="#{messages['menu.pause']}" outcome="/pause" icon="pi pi-search">
+            </p:menuitem>
+            <p:menuitem value="#{messages['menu.info']}" url="/info" icon="pi pi-briefcase">
+            </p:menuitem>
+        </p:tabMenu>
         <p>
             <h1>#{messages['page.title.h1']}</h1>
         </p>
@@ -59,22 +69,6 @@
                 <p:resetInput target="panel"/>
             </p:commandButton>
         </h:panelGrid>
-
-        <p:separator/>
-
-    </h:form>
-    <h:form id="pausePage">
-        <p>
-            <h1>#{messages['page.title.h1.pause']}</h1>
-        </p>
-        <p:commandButton action="#{workhours.startPause}" value="#{messages['pauseStart']}" update="@this"
-                         style="margin-right:20px;"
-                         styleClass="ui-priority-primary" ajax="false"/>
-        <p:commandButton action="#{workhours.stopPause}" value="#{messages['pauseStop']}" update="@this"
-                         style="margin-right:20px;"
-                         styleClass="ui-priority-primary" ajax="false"/>
-
-        <h:outputText value="#{workhours.pauseRealTime}"/>
     </h:form>
 </h:body>
 </html>
