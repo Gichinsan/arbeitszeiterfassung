@@ -24,7 +24,5 @@ hs_err_pid*
 
 #ide specific
 .idea/**
-.mvn/**
-mvnw*
 database/**
 target/**
