@@ -19,24 +19,45 @@
             </p:menuitem>
             <p:menuitem value="#{messages['menu.pause']}" outcome="/pause" icon="pi pi-search">
             </p:menuitem>
-            <p:menuitem value="#{messages['menu.info']}" url="/info" icon="pi pi-briefcase">
+            <p:menuitem value="#{messages['menu.info']}" url="/v1/info" icon="pi pi-briefcase">
             </p:menuitem>
         </p:tabMenu>
         <p>
             <h1>#{messages['reportpage.title.h1']}</h1>
         </p>
 
-        <p:dataTable var="rep" value="#{report.workinghours}" style="width:320px">
-            <p:column headerText="#{messages['tbl.header.id']}" style="width:15px">
-                <h:outputText value="#{rep.id}"/>
-            </p:column>
-            <p:column headerText="#{messages['tbl.header.date']}" style="width:30px">
-                <h:outputText value="#{rep.date}"/>
-            </p:column>
-            <p:column headerText="#{messages['tbl.header.workingHours']}" style="width:30px">
-                <h:outputText value="#{rep.workingHours}"/>
-            </p:column>
-        </p:dataTable>
+        <p:tabView dynamic="true" effect="fade" effectDuration="fast" activeIndex="#{report.tabIndex}">
+            <p:tab id="h" title="#{report.getMonthByName(2)}">
+                <p:dataTable var="rep" value="#{report.getWorkinghoursByMonthValue(2)}" style="width:320px">
+                    <p:column headerText="#{messages['tbl.header.date']}" style="width:30px">
+                        <h:outputText value="#{rep.date}"/>
+                    </p:column>
+                    <p:column headerText="#{messages['tbl.header.workingHours']}" style="width:30px">
+                        <h:outputText value="#{rep.workingHours}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:tab>
+            <p:tab id="hh" title="#{report.getMonthByName(1)}">
+                <p:dataTable var="rep" value="#{report.getWorkinghoursByMonthValue(1)}" style="width:320px">
+                    <p:column headerText="#{messages['tbl.header.date']}" style="width:30px">
+                        <h:outputText value="#{rep.date}"/>
+                    </p:column>
+                    <p:column headerText="#{messages['tbl.header.workingHours']}" style="width:30px">
+                        <h:outputText value="#{rep.workingHours}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:tab>
+            <p:tab id="hhh" title="#{report.getMonthByName(0)}">
+                <p:dataTable var="rep" value="#{report.getWorkinghoursByMonthValue(0)}" style="width:320px">
+                    <p:column headerText="#{messages['tbl.header.date']}" style="width:30px">
+                        <h:outputText value="#{rep.date}"/>
+                    </p:column>
+                    <p:column headerText="#{messages['tbl.header.workingHours']}" style="width:30px">
+                        <h:outputText value="#{rep.workingHours}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:tab>
+        </p:tabView>
 
     </h:form>
 </h:body>

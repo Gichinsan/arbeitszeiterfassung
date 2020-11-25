@@ -52,14 +52,13 @@ public class WorkHoursService implements IWorkhoursService {
     }
 
     @Override
-    public List<Workhours> findWorkhoursByMonth(int month) {
-        return repository.findWorkhoursByMonth(month);
-    }
-
-    @Override
     public Workhours findWorkhoursByDate(LocalDate date) {
         return repository.findWorkhoursByDate(date);
     }
 
+    @Override
+    public List<Workhours> findByMonth(int month) {
+        return repository.findByMonth(month);
+    }
 
 }

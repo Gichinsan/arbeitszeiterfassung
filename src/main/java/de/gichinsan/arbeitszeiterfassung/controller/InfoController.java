@@ -23,7 +23,7 @@ public class InfoController implements Serializable {
     private String buildTimestamp;
 
 
-    @RequestMapping(value = "/info", produces = MediaType.TEXT_PLAIN_VALUE)
+    @RequestMapping(value = "/v1/info", produces = MediaType.TEXT_PLAIN_VALUE)
     @ResponseBody
     public String getInfo() {
         StringBuilder sb = new StringBuilder();

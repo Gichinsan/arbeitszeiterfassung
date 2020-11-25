@@ -87,6 +87,7 @@ public class WorkhoursController implements Serializable {
 
         Workhours wh = new Workhours();
         wh.setDate(arbeitstag);
+        wh.setMonth(arbeitstag.getMonthValue());
         wh.setStartTimeHours(startZeit.getHour());
         wh.setStartTimeMinutes(startZeit.getMinute());
         wh.setStopTimeHours(endZeit.getHour());

@@ -34,6 +34,7 @@ public class Workhours {
     private Long id;
 
     private LocalDate date;
+    private int month;
     private int startTimeHours;
     private int startTimeMinutes;
     private int stopTimeHours;

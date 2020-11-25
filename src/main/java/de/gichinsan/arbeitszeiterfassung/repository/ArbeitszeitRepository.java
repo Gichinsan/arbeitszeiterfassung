@@ -31,6 +31,7 @@ public interface ArbeitszeitRepository extends JpaRepository<Workhours, Long> {
     @Query("select r from Workhours r where r.date = :workDate")
     Workhours findWorkhoursByDate(@Param("workDate") LocalDate date);
 
-    @Query(value="select r from Workhours r where r.date like :%month% order by r.date", nativeQuery=true)
-    List<Workhours> findWorkhoursByMonth(@Param("month") int month);
+    List<Workhours> findByMonth(int month);
+
+
 }

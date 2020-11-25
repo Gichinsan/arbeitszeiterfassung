@@ -39,13 +39,13 @@ public class PauseController implements Serializable {
     private int minutes;
     private int pauseRealTime;
 
-    @PostMapping(value = "/startPause")
+    @PostMapping(value = "/v1/startPause")
     public String startPause() {
         start = Instant.now();
         return "/pause";
     }
 
-    @PostMapping(value = "/stopPause")
+    @PostMapping(value = "/v1/stopPause")
     public String stopPause() {
         stop = Instant.now();
         Duration d = Duration.between(start, stop);
@@ -53,7 +53,7 @@ public class PauseController implements Serializable {
         return "/pause";
     }
 
-    @RequestMapping(value = "/pausetime", produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "/v1/pausetime", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public int getPauseRealTime() {
         if (minutes > 0) {

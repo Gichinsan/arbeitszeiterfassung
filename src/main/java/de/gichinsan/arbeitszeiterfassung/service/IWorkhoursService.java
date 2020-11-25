@@ -29,7 +29,9 @@ public interface IWorkhoursService {
 
     List<Workhours> getAllWorkinghours();
 
-    List<Workhours> findWorkhoursByMonth(int month);
-
     Workhours findWorkhoursByDate(LocalDate date);
+
+    List<Workhours> findByMonth(int month);
+
+
 }
