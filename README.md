@@ -28,4 +28,5 @@ Für die developer variante wird der Port 8888 verwendet und kann wie folgt gest
 `java -jar -Dspring.profiles.active=dev arbeitszeiterfassung-1.0-SNAPSHOT.war`
 
 Für die Produktive variante wird der Port 9002 verwendet und kann wie folgt gestartet werden:
+
 `java -jar -Dspring.profiles.active=prod arbeitszeiterfassung-1.0-SNAPSHOT.war`
