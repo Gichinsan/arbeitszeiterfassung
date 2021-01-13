@@ -48,13 +48,25 @@ public class ReportController implements Serializable {
 
     public String getMonthByName(String value) {
         LocalDate date = LocalDate.now();
-        LocalDate prevMonth = LocalDate.of(date.getYear(), date.getMonthValue() - Integer.parseInt(value), date.getDayOfMonth());
+        int year = date.getYear();
+        int iMonth = date.getMonthValue() - Integer.parseInt(value);
+        if (iMonth < 1) {
+            year = year - 1;
+            iMonth = 13 - Integer.parseInt(value);
+        }
+        LocalDate prevMonth = LocalDate.of(year, iMonth, date.getDayOfMonth());
         return prevMonth.getMonth().name();
     }
 
     public List<Workhours> getWorkinghoursByMonthValue(String value) {
         LocalDate date = LocalDate.now();
-        LocalDate prevMonth = LocalDate.of(date.getYear(), date.getMonthValue() - Integer.parseInt(value), date.getDayOfMonth());
+        int year = date.getYear();
+        int iMonth = date.getMonthValue() - Integer.parseInt(value);
+        if (iMonth < 1) {
+            year = year - 1;
+            iMonth = 13 - Integer.parseInt(value);
+        }
+        LocalDate prevMonth = LocalDate.of(year, iMonth, date.getDayOfMonth());
         return service.findByMonth(prevMonth.getMonth().getValue());
     }
 
