@@ -47,6 +47,12 @@ public class WorkHoursService implements IWorkhoursService {
     }
 
     @Override
+    public boolean saveUpdate(Workhours workhours) {
+        repository.save(workhours);
+        return true;
+    }
+
+    @Override
     public List<Workhours> getAllWorkinghours() {
         return repository.findAll();
     }

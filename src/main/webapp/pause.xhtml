@@ -13,8 +13,10 @@
 <h:body>
     <h:form id="startPage">
         <p:growl id="growl" showDetail="true" sticky="true" skipDetailIfEqualsSummary="true"/>
-        <p:tabMenu activeIndex="2">
+        <p:tabMenu activeIndex="3">
             <p:menuitem value="#{messages['menu.home']}" url="/" icon="pi pi-star">
+            </p:menuitem>
+            <p:menuitem value="#{messages['menu.edit']}" outcome="/edit" icon="pi pi-search">
             </p:menuitem>
             <p:menuitem value="#{messages['menu.reportView']}" outcome="/reportView" icon="pi pi-search">
             </p:menuitem>

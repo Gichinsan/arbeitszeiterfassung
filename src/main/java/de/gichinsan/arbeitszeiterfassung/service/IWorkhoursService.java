@@ -27,6 +27,8 @@ public interface IWorkhoursService {
 
     boolean save(Workhours workhours);
 
+    boolean saveUpdate(Workhours workhours);
+
     List<Workhours> getAllWorkinghours();
 
     Workhours findWorkhoursByDate(LocalDate date);
