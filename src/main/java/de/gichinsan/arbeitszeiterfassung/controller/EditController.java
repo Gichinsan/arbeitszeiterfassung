@@ -22,7 +22,6 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
@@ -35,13 +34,14 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Data
-@Component(value = "workhours")
+@Component(value = "editctl")
 @RestController
 @RequestScoped
 @Slf4j
-public class WorkhoursController implements Serializable {
+public class EditController implements Serializable {
 
     private LocalDate arbeitstag;
+    private LocalDate searcharbeitstag;
     private LocalTime startZeit;
     private LocalTime endZeit;
     private LocalTime minTime;
@@ -51,6 +51,7 @@ public class WorkhoursController implements Serializable {
 
     @Autowired
     private WorkHoursService service;
+    private Workhours uwh;
 
     @PostConstruct
     public void init() {
@@ -58,19 +59,22 @@ public class WorkhoursController implements Serializable {
         maxTime = LocalTime.of(19, 0);
     }
 
-
-    /**
-     * @return
-     */
-    @GetMapping("/")
-    public String homepage() {
-        return "index";
+    public String searchWorkingDay() {
+        uwh = new Workhours();
+        try {
+            uwh = service.findWorkhoursByDate(searcharbeitstag);
+            setStartZeit(LocalTime.of(uwh.getStartTimeHours(), uwh.getStartTimeMinutes()));
+            setPause(LocalTime.of(uwh.getDurationPauseHours(), uwh.getDurationPauseMinutes()));
+            setEndZeit(LocalTime.of(uwh.getStopTimeHours(), uwh.getStopTimeMinutes()));
+            setBerechnung(uwh.getWorkingHours());
+        } catch (Exception e) {
+            addErrorMessage("Für diesen Tag exisiteren keine einträge! " + searcharbeitstag);
+            log.error(e.getLocalizedMessage());
+        }
+        return "/edit";
     }
 
-    /**
-     * @return
-     */
-    public String saveAction() {
+    public String updateAction() {
 
         Duration duration = Duration.between(endZeit, startZeit);
         long diff = Math.abs(duration.toMinutes());
@@ -84,22 +88,21 @@ public class WorkhoursController implements Serializable {
 
         setBerechnung(realDiff);
 
-        Workhours wh = new Workhours();
-        wh.setDate(arbeitstag);
-        wh.setMonth(arbeitstag.getMonthValue());
-        wh.setStartTimeHours(startZeit.getHour());
-        wh.setStartTimeMinutes(startZeit.getMinute());
-        wh.setStopTimeHours(endZeit.getHour());
-        wh.setStopTimeMinutes(endZeit.getMinute());
-        wh.setDurationPauseHours(pause.getHour());
-        wh.setDurationPauseMinutes(pause.getMinute());
-        wh.setWorkingHours(realDiff);
-        if (service.save(wh)) {
-            addMessage("Arbeitstag erfolgreich gespeichert");
-            return "/index";
+        uwh.setDate(searcharbeitstag);
+        uwh.setMonth(searcharbeitstag.getMonthValue());
+        uwh.setStartTimeHours(startZeit.getHour());
+        uwh.setStartTimeMinutes(startZeit.getMinute());
+        uwh.setStopTimeHours(endZeit.getHour());
+        uwh.setStopTimeMinutes(endZeit.getMinute());
+        uwh.setDurationPauseHours(pause.getHour());
+        uwh.setDurationPauseMinutes(pause.getMinute());
+        uwh.setWorkingHours(realDiff);
+        if (service.saveUpdate(uwh)) {
+            addMessage("Arbeitstag erfolgreich geupdated");
+            return "/edit";
         } else {
-            addErrorMessage("Für diesen Tag exisiteren schon einträge! " + arbeitstag);
-            return "/index";
+            addErrorMessage("Für diesen Tag exisiteren keine einträge! " + searcharbeitstag);
+            return "/edit";
         }
     }
 

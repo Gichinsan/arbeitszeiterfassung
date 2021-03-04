@@ -11,9 +11,9 @@
 </h:head>
 
 <h:body>
-    <h:form id="startPage">
+    <h:form id="editPage">
         <p:growl id="growl" showDetail="true" sticky="true" skipDetailIfEqualsSummary="true"/>
-        <p:tabMenu activeIndex="0">
+        <p:tabMenu activeIndex="1">
             <p:menuitem value="#{messages['menu.home']}" url="/" icon="pi pi-star">
             </p:menuitem>
             <p:menuitem value="#{messages['menu.edit']}" outcome="/edit" icon="pi pi-search">
@@ -26,46 +26,53 @@
             </p:menuitem>
         </p:tabMenu>
         <p>
-            <h1>#{messages['page.title.h1']}</h1>
+            <h1>#{messages['page.title.edit.h1']}</h1>
         </p>
         <h:panelGrid id="panel" columns="2" cellpadding="5">
 
             <p:outputLabel for="button" value="#{messages['label.workingday']}"/>
-            <p:datePicker id="button" value="#{workhours.arbeitstag}" showIcon="true" required="true"/>
+            <p:datePicker id="button" value="#{editctl.searcharbeitstag}" showIcon="true" required="true"/>
+
+            <p:outputLabel for="button" value="#{messages['label.search']}"/>
+            <p:commandButton action="#{editctl.searchWorkingDay}" value="#{messages['label.search']}" update="@form"
+                             style="margin-right:20px;"
+                             styleClass="ui-priority-primary" ajax="false">
+                <p:resetInput target="panel"/>
+            </p:commandButton>
 
             <p:outputLabel for="Starttime" value="#{messages['label.start']}"/>
             <p:outputPanel>
-                <p:datePicker id="Starttime" value="#{workhours.startZeit}" timeOnly="true"
-                              mindate="#{workhours.minTime}" maxdate="#{workhours.maxTime}" required="true"/>
+                <p:datePicker id="Starttime" value="#{editctl.startZeit}" timeOnly="true"
+                              mindate="#{editctl.minTime}" maxdate="#{editctl.maxTime}"/>
                 <h:outputText value="#{messages['label.between']}"/>
-                <h:outputText value="#{workhours.minTime}"/>
+                <h:outputText value="#{editctl.minTime}"/>
                 <p:spacer width="5" height="10"/>
                 <h:outputText value="#{messages['label.and']}"/>
                 <p:spacer width="5" height="10"/>
-                <h:outputText value="#{workhours.maxTime}"/>
+                <h:outputText value="#{editctl.maxTime}"/>
                 <h:outputText value="#{messages['label.closeBreak']}"/>
             </p:outputPanel>
 
             <p:outputLabel for="pauseId" value="#{messages['label.break']}"/>
-            <p:datePicker id="pauseId" value="#{workhours.pause}" timeOnly="true" pattern="HH:mm" required="true"/>
+            <p:datePicker id="pauseId" value="#{editctl.pause}" timeOnly="true" pattern="HH:mm" />
 
             <p:outputLabel for="Endtime" value="#{messages['label.end']}"/>
             <p:outputPanel>
-                <p:datePicker id="Endtime" value="#{workhours.endZeit}" timeOnly="true"
-                              mindate="#{workhours.minTime}" maxdate="#{workhours.maxTime}" required="true"/>
+                <p:datePicker id="Endtime" value="#{editctl.endZeit}" timeOnly="true"
+                              mindate="#{editctl.minTime}" maxdate="#{editctl.maxTime}"/>
                 <h:outputText value="#{messages['label.between']}"/>
-                <h:outputText value="#{workhours.minTime}"/>
+                <h:outputText value="#{editctl.minTime}"/>
                 <p:spacer width="5" height="10"/>
                 <h:outputText value="#{messages['label.and']}"/>
                 <p:spacer width="5" height="10"/>
-                <h:outputText value="#{workhours.maxTime}"/>
+                <h:outputText value="#{editctl.maxTime}"/>
                 <h:outputText value="#{messages['label.closeBreak']}"/>
             </p:outputPanel>
 
             <p:outputLabel for="berechnung" value="#{messages['label.worktime']}"/>
-            <h:outputText id="berechnung" value="#{workhours.berechnung}"/>
+            <h:outputText id="berechnung" value="#{editctl.berechnung}"/>
 
-            <p:commandButton action="#{workhours.saveAction}" value="#{messages['save']}" update="@form"
+            <p:commandButton action="#{editctl.updateAction}" value="#{messages['edit']}" update="@form"
                              style="margin-right:20px;"
                              styleClass="ui-priority-primary" ajax="false">
                 <p:resetInput target="panel"/>
