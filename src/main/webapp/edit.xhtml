@@ -28,7 +28,7 @@
         <p>
             <h1>#{messages['page.title.edit.h1']}</h1>
         </p>
-        <h:panelGrid id="panel" columns="2" cellpadding="5">
+        <h:panelGrid id="editpanel" columns="2" cellpadding="5">
 
             <p:outputLabel for="button" value="#{messages['label.workingday']}"/>
             <p:datePicker id="button" value="#{editctl.searcharbeitstag}" showIcon="true" required="true"/>
@@ -37,7 +37,7 @@
             <p:commandButton action="#{editctl.searchWorkingDay}" value="#{messages['label.search']}" update="@form"
                              style="margin-right:20px;"
                              styleClass="ui-priority-primary" ajax="false">
-                <p:resetInput target="panel"/>
+                <p:resetInput target="editpanel"/>
             </p:commandButton>
 
             <p:outputLabel for="Starttime" value="#{messages['label.start']}"/>
@@ -75,8 +75,20 @@
             <p:commandButton action="#{editctl.updateAction}" value="#{messages['edit']}" update="@form"
                              style="margin-right:20px;"
                              styleClass="ui-priority-primary" ajax="false">
-                <p:resetInput target="panel"/>
+                <p:resetInput target="editpanel"/>
             </p:commandButton>
+            <p:commandButton action="#{editctl.deleteAction}" value="#{messages['delete']}" update="@form"
+                             style="margin-right:20px;"
+                             styleClass="ui-priority-primary" ajax="true">
+                <p:confirm header="#{messages['confirm.header']}" message="#{messages['confirm.delete']}" icon="pi pi-info-circle"/>
+                <p:resetInput target="editpanel"/>
+            </p:commandButton>
+
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+                <p:commandButton value="#{messages['confirm.no']}" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+                <p:commandButton value="#{messages['confirm.yes']}" action="#{editctl.deleteAction}" type="button" styleClass="ui-confirmdialog-yes" />
+            </p:confirmDialog>
         </h:panelGrid>
     </h:form>
 </h:body>

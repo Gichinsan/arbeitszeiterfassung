@@ -67,4 +67,10 @@ public class WorkHoursService implements IWorkhoursService {
         return repository.findByMonth(month);
     }
 
+    @Override
+    public void delete(Workhours workhours) {
+        repository.delete(workhours);
+    }
+
+
 }

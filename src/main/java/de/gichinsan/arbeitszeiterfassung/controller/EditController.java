@@ -106,6 +106,24 @@ public class EditController implements Serializable {
         }
     }
 
+    public String deleteAction() {
+        try {
+            service.delete(uwh);
+            addMessage("Arbeitstag erfolgreich gelöscht");
+            setStartZeit(null);
+            setEndZeit(null);
+            setPause(null);
+            setSearcharbeitstag(null);
+            setBerechnung(null);
+            return "/edit";
+        } catch (Exception e) {
+            addErrorMessage("Für diesen Tag exisiteren keine einträge! " + searcharbeitstag);
+            log.error(e.getLocalizedMessage());
+            return "/edit";
+        }
+    }
+
+
     /**
      * @param summary
      */
