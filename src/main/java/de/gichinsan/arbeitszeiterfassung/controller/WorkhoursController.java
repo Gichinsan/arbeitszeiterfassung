@@ -96,6 +96,11 @@ public class WorkhoursController implements Serializable {
         wh.setWorkingHours(realDiff);
         if (service.save(wh)) {
             addMessage("Arbeitstag erfolgreich gespeichert");
+            setArbeitstag(null);
+            setStartZeit(null);
+            setEndZeit(null);
+            setPause(null);
+            setBerechnung(null);
             return "/index";
         } else {
             addErrorMessage("Für diesen Tag exisiteren schon einträge! " + arbeitstag);
