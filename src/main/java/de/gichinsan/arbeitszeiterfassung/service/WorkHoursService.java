@@ -63,8 +63,8 @@ public class WorkHoursService implements IWorkhoursService {
     }
 
     @Override
-    public List<Workhours> findByMonth(int month) {
-        return repository.findByMonth(month);
+    public List<Workhours> findByMonthOrderByDate(int month) {
+        return repository.findByMonthOrderByDate(month);
     }
 
     @Override
