@@ -83,8 +83,7 @@
                 <p:confirm header="#{messages['confirm.header']}" message="#{messages['confirm.delete']}" icon="pi pi-info-circle"/>
                 <p:resetInput target="editpanel"/>
             </p:commandButton>
-
-
+            
             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
                 <p:commandButton value="#{messages['confirm.no']}" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
                 <p:commandButton value="#{messages['confirm.yes']}" action="#{editctl.deleteAction}" type="button" styleClass="ui-confirmdialog-yes" />
