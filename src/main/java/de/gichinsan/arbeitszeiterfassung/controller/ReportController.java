@@ -43,7 +43,7 @@ public class ReportController implements Serializable {
     @RequestMapping(value = "/v1/reportByMonth", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public List<Workhours> getWorkinghoursByMonth(@RequestParam(value = "month") int month) {
-        return service.findByMonth(month);
+        return service.findByMonthOrderByDate(month);
     }
 
     public String getMonthByName(String value) {
@@ -67,7 +67,7 @@ public class ReportController implements Serializable {
             iMonth = 13 - Integer.parseInt(value);
         }
         LocalDate prevMonth = LocalDate.of(year, iMonth, date.getDayOfMonth());
-        return service.findByMonth(prevMonth.getMonth().getValue());
+        return service.findByMonthOrderByDate(prevMonth.getMonth().getValue());
     }
 
     public String getTabIndex() {
