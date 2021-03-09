@@ -73,4 +73,19 @@ public class ReportController implements Serializable {
     public String getTabIndex() {
         return "2";
     }
+
+
+    @RequestMapping(value = "/v1/sumByMonth", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public String getSumByMonth(@RequestParam(value = "month") int month) {
+        LocalDate date = LocalDate.now();
+        int year = date.getYear();
+        int iMonth = date.getMonthValue() - month;
+        if (iMonth < 1) {
+            year = year - 1;
+            iMonth = 13 - month;
+        }
+        LocalDate prevMonth = LocalDate.of(year, iMonth, date.getDayOfMonth());
+        return service.findByMonthSumByWorkingHours(prevMonth.getMonth().getValue());
+    }
 }

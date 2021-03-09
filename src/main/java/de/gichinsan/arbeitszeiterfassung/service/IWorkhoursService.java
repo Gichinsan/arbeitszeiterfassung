@@ -34,4 +34,6 @@ public interface IWorkhoursService {
     List<Workhours> findByMonthOrderByDate(int month);
 
     void delete(Workhours workhours);
+
+    String findByMonthSumByWorkingHours(int month);
 }

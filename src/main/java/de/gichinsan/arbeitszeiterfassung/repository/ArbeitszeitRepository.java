@@ -33,5 +33,8 @@ public interface ArbeitszeitRepository extends JpaRepository<Workhours, Long> {
 
     List<Workhours> findByMonthOrderByDate(int month);
 
+    @Query("select r from Workhours r where r.month = :month")
+    List<Workhours> findByMonthSumByWorkingHours(@Param("month") int month);
+
 
 }

@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -70,6 +71,19 @@ public class WorkHoursService implements IWorkhoursService {
     @Override
     public void delete(Workhours workhours) {
         repository.delete(workhours);
+    }
+
+    @Override
+    public String findByMonthSumByWorkingHours(int month) {
+        List<Workhours> monthly = repository.findByMonthSumByWorkingHours(month);
+        int gesamtZeit = 0;
+
+        for (int i = 0; i < monthly.size(); i++) {
+            LocalTime ltObject3 = LocalTime.parse(monthly.get(i).getWorkingHours());
+            gesamtZeit = gesamtZeit + (ltObject3.getHour() * 60) + ltObject3.getMinute();
+        }
+
+        return String.valueOf((gesamtZeit / 60) + ":" + (gesamtZeit % 60));
     }
 
 
