@@ -11,9 +11,9 @@
 </h:head>
 
 <h:body>
-    <h:form id="startPage">
+    <h:form id="adminPage">
         <p:growl id="growl" showDetail="true" sticky="true" skipDetailIfEqualsSummary="true"/>
-        <p:tabMenu activeIndex="3">
+        <p:tabMenu activeIndex="5">
             <p:menuitem value="#{messages['menu.home']}" url="/" icon="pi pi-star">
             </p:menuitem>
             <p:menuitem value="#{messages['menu.edit']}" outcome="/edit" icon="pi pi-search">
@@ -28,16 +28,28 @@
             </p:menuitem>
         </p:tabMenu>
         <p>
-            <h1>#{messages['page.title.h1.pause']}</h1>
+            <h1>#{messages['page.title.admin.h1']}</h1>
         </p>
-        <p:commandButton action="#{pause.startPause}" value="#{messages['pauseStart']}" update="@this"
-                         style="margin-right:20px;"
-                         styleClass="ui-priority-primary" ajax="false"/>
-        <p:commandButton action="#{pause.stopPause}" value="#{messages['pauseStop']}" update="@this"
-                         style="margin-right:20px;"
-                         styleClass="ui-priority-primary" ajax="false"/>
+        <h:panelGrid id="adminpanel" columns="2" cellpadding="5">
 
-        <h:outputText value="#{pause.pauseRealTime}"/>
+            <h:outputText value="firstname"/>
+            <h:inputText id="firstname" value="#{adminctl.firstName}"/>
+
+            <h:outputText value="lastname"/>
+            <h:inputText id="lastname" value="#{adminctl.lastName}"/>
+
+            <h:outputText value="weeklyWorkinghours"/>
+            <h:inputText id="weeklyWorkinghours" value="#{adminctl.weeklyWorkingshours}"/>
+
+            <h:outputText value="maxDailyWorkinghours"/>
+            <h:inputText id="maxDailyWorkinghours" value="#{adminctl.maxDailyWorkinghours}"/>
+
+            <p:commandButton action="#{adminctl.saveAction}" value="#{messages['save']}" update="@form"
+                             style="margin-right:20px;"
+                             styleClass="ui-priority-primary" ajax="true">
+            </p:commandButton>
+
+        </h:panelGrid>
     </h:form>
 </h:body>
 </html>
