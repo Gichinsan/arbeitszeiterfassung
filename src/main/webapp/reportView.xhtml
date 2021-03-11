@@ -23,6 +23,8 @@
             </p:menuitem>
             <p:menuitem value="#{messages['menu.info']}" url="/v1/info" icon="pi pi-briefcase">
             </p:menuitem>
+            <p:menuitem value="#{messages['menu.admin']}" outcome="/admin" icon="pi pi-briefcase">
+            </p:menuitem>
         </p:tabMenu>
         <p>
             <h1>#{messages['reportpage.title.h1']}</h1>
@@ -42,6 +44,8 @@
                 <h:panelGrid id="panel2" columns="2" cellpadding="5">
                     <p:outputLabel for="sumOfhours2" value="#{messages['IsWorkhours']}"/>
                     <h:outputText id="sumOfhours2" value="#{report.getSumByMonth(2)}"/>
+                    <p:outputLabel for="sollhours2" value="#{messages['SollWorkhours']}"/>
+                    <h:outputText id="sollhours2" value="#{report.getSollWorkinghours(2)}"/>
                 </h:panelGrid>
             </p:tab>
             <p:tab id="hh" title="#{report.getMonthByName(1)}">
@@ -57,6 +61,8 @@
                 <h:panelGrid id="panel1" columns="2" cellpadding="5">
                     <p:outputLabel for="sumOfhours1" value="#{messages['IsWorkhours']}"/>
                     <h:outputText id="sumOfhours1" value="#{report.getSumByMonth(1)}"/>
+                    <p:outputLabel for="sollhours1" value="#{messages['SollWorkhours']}"/>
+                    <h:outputText id="sollhours1" value="#{report.getSollWorkinghours(1)}"/>
                 </h:panelGrid>
             </p:tab>
             <p:tab id="hhh" title="#{report.getMonthByName(0)}">
@@ -73,6 +79,8 @@
                 <h:panelGrid id="panel0" columns="2" cellpadding="5">
                     <p:outputLabel for="sumOfhours0" value="#{messages['IsWorkhours']}"/>
                     <h:outputText id="sumOfhours0" value="#{report.getSumByMonth(0)}"/>
+                    <p:outputLabel for="sollhours0" value="#{messages['SollWorkhours']}"/>
+                    <h:outputText id="sollhours0" value="#{report.getSollWorkinghours(0)}"/>
                 </h:panelGrid>
             </p:tab>
         </p:tabView>
