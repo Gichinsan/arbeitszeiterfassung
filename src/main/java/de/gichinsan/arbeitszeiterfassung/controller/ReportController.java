@@ -129,11 +129,17 @@ public class ReportController implements Serializable {
             int dailyhours = wwhours / 5;
             int zwZeit = wdi * dailyhours;
 
-            return String.valueOf(zwZeit + ":" +"00");
+            return String.valueOf(zwZeit + ":" + "00");
         } catch (Exception e) {
             log.error(e.getLocalizedMessage());
             return null;
         }
 
+    }
+
+    @RequestMapping(value = "/v1/employeeData", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public List<Employee> getEmployeeData() {
+        return employeeService.getAllEmployee();
     }
 }
