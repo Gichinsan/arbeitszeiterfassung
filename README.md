@@ -76,6 +76,10 @@ Für die **Produktive** -variante wird der Port 9002 verwendet und kann wie folg
 
 `java -jar -Dspring.profiles.active=prod arbeitszeiterfassung-1.0-SNAPSHOT.war`
 
+## REST Dokumentation 
+
+Link zu [API](./api.md) REST API Dokumentation.
+
 
 ## Applikations-Dokumentation
 
