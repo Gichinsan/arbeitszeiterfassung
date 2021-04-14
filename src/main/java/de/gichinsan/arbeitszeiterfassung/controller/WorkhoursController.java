@@ -101,7 +101,7 @@ public class WorkhoursController implements Serializable {
             setEndZeit(null);
             setPause(null);
             setBerechnung(null);
-            return "/index";
+            return "/overview";
         } else {
             addErrorMessage("Für diesen Tag exisiteren schon einträge! " + arbeitstag);
             return "/index";

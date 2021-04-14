@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<faces-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
         http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
               version="2.2">
@@ -16,17 +16,32 @@
     <navigation-rule>
         <from-view-id>*</from-view-id>
         <navigation-case>
-            <from-outcome>pause</from-outcome>
+            <from-outcome>/startpause</from-outcome>
             <to-view-id>/pause.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
-
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>/stoppause</from-outcome>
+            <to-view-id>/pause.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
     <navigation-rule>
         <from-view-id>*</from-view-id>
         <navigation-case>
             <from-outcome>edit</from-outcome>
             <to-view-id>/edit.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>/overview</from-outcome>
+            <to-view-id>/reportView.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

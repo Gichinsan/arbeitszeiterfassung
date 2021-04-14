@@ -1,7 +1,6 @@
 package de.gichinsan.arbeitszeiterfassung.service;
 
 import de.gichinsan.arbeitszeiterfassung.model.Employee;
-import de.gichinsan.arbeitszeiterfassung.model.Workhours;
 
 import java.util.List;
 

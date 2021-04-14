@@ -83,7 +83,7 @@ public class WorkHoursService implements IWorkhoursService {
             gesamtZeit = gesamtZeit + (ltObject3.getHour() * 60) + ltObject3.getMinute();
         }
 
-        return String.valueOf((gesamtZeit / 60) + ":" + (gesamtZeit % 60));
+        return (gesamtZeit / 60) + ":" + (gesamtZeit % 60);
     }
 
 

@@ -1,20 +1,18 @@
 /**
  * This file is part of arbeitszeiterfassung.
- *
+ * <p>
  * arbeitszeiterfassung is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
- *
+ * <p>
  * arbeitszeiterfassung is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- *
+ * <p>
  * You should have received a copy of the GNU General Public License along with
  * arbeitszeiterfassung. If not, see <http://www.gnu.org/licenses/>.
- *
- *
  */
 package de.gichinsan.arbeitszeiterfassung;
 
@@ -47,6 +45,22 @@ public class ArbeitszeiterfassunglibApplication implements WebMvcConfigurer {
         SpringApplication.run(ArbeitszeiterfassunglibApplication.class, args);
     }
 
+    @Bean(name = "encryptorBean")
+    static public StringEncryptor stringEncryptor() {
+        PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
+        SimpleStringPBEConfig config = new SimpleStringPBEConfig();
+        config.setPassword("s3cr3t");
+        config.setAlgorithm("PBEWithMD5AndDES");
+        config.setKeyObtentionIterations("1000");
+        config.setPoolSize("1");
+        config.setProviderName("SunJCE");
+        config.setSaltGeneratorClassName("org.jasypt.salt.RandomSaltGenerator");
+        config.setIvGeneratorClassName("org.jasypt.iv.NoIvGenerator");
+        config.setStringOutputType("base64");
+        encryptor.setConfig(config);
+        return encryptor;
+    }
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/")
@@ -69,22 +83,6 @@ public class ArbeitszeiterfassunglibApplication implements WebMvcConfigurer {
                 servletContext.addListener("org.springframework.web.context.request.RequestContextListener");
             }
         };
-    }
-
-    @Bean(name = "encryptorBean")
-    static public StringEncryptor stringEncryptor() {
-        PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
-        SimpleStringPBEConfig config = new SimpleStringPBEConfig();
-        config.setPassword("s3cr3t");
-        config.setAlgorithm("PBEWithMD5AndDES");
-        config.setKeyObtentionIterations("1000");
-        config.setPoolSize("1");
-        config.setProviderName("SunJCE");
-        config.setSaltGeneratorClassName("org.jasypt.salt.RandomSaltGenerator");
-        config.setIvGeneratorClassName("org.jasypt.iv.NoIvGenerator");
-        config.setStringOutputType("base64");
-        encryptor.setConfig(config);
-        return encryptor;
     }
 
     @Override

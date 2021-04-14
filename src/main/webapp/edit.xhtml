@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
+<html xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
+      xmlns="http://www.w3.org/1999/xhtml"
 >
 
 <h:head>
@@ -56,7 +56,7 @@
             </p:outputPanel>
 
             <p:outputLabel for="pauseId" value="#{messages['label.break']}"/>
-            <p:datePicker id="pauseId" value="#{editctl.pause}" timeOnly="true" pattern="HH:mm" />
+            <p:datePicker id="pauseId" value="#{editctl.pause}" timeOnly="true" pattern="HH:mm"/>
 
             <p:outputLabel for="Endtime" value="#{messages['label.end']}"/>
             <p:outputPanel>
@@ -82,13 +82,16 @@
             <p:commandButton action="#{editctl.deleteAction}" value="#{messages['delete']}" update="@form"
                              style="margin-right:20px;"
                              styleClass="ui-priority-primary" ajax="true">
-                <p:confirm header="#{messages['confirm.header']}" message="#{messages['confirm.delete']}" icon="pi pi-info-circle"/>
+                <p:confirm header="#{messages['confirm.header']}" message="#{messages['confirm.delete']}"
+                           icon="pi pi-info-circle"/>
                 <p:resetInput target="editpanel"/>
             </p:commandButton>
 
             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
-                <p:commandButton value="#{messages['confirm.no']}" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
-                <p:commandButton value="#{messages['confirm.yes']}" action="#{editctl.deleteAction}" type="button" styleClass="ui-confirmdialog-yes" />
+                <p:commandButton value="#{messages['confirm.no']}" type="button"
+                                 styleClass="ui-confirmdialog-no ui-button-flat"/>
+                <p:commandButton value="#{messages['confirm.yes']}" action="#{editctl.deleteAction}" type="button"
+                                 styleClass="ui-confirmdialog-yes"/>
             </p:confirmDialog>
         </h:panelGrid>
     </h:form>

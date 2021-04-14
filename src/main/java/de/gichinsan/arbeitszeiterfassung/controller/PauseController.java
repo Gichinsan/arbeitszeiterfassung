@@ -18,10 +18,7 @@ package de.gichinsan.arbeitszeiterfassung.controller;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.faces.bean.RequestScoped;
 import java.io.Serializable;
@@ -53,7 +50,7 @@ public class PauseController implements Serializable {
         return "/stoppause";
     }
 
-    @RequestMapping(value = "/v1/pausetime", produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "/v1/pausetime", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public int getPauseRealTime() {
         if (minutes > 0) {

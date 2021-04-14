@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.Serializable;
@@ -34,19 +31,19 @@ public class ReportController implements Serializable {
     @Autowired
     private EmployeeService employeeService;
 
-    @RequestMapping(value = "/v1/reports", produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "/v1/reports", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public List<Workhours> getWorkinghours() {
         return service.getAllWorkinghours();
     }
 
-    @RequestMapping(value = "/v1/reportByDay", produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "/v1/reportByDay", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public Workhours getWorkinghours(@RequestParam(value = "date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         return service.findWorkhoursByDate(date);
     }
 
-    @RequestMapping(value = "/v1/reportByMonth", produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "/v1/reportByMonth", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public List<Workhours> getWorkinghoursByMonth(@RequestParam(value = "month") int month) {
         return service.findByMonthOrderByDate(month);
@@ -81,7 +78,7 @@ public class ReportController implements Serializable {
     }
 
 
-    @RequestMapping(value = "/v1/sumByMonth", produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "/v1/sumByMonth", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public String getSumByMonth(@RequestParam(value = "month") int month) {
         LocalDate date = LocalDate.now();
@@ -95,7 +92,7 @@ public class ReportController implements Serializable {
         return service.findByMonthSumByWorkingHours(prevMonth.getMonth().getValue());
     }
 
-    @RequestMapping(value = "/v1/workdaysByMonth", produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "/v1/workdaysByMonth", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public String getWorkDaysOfMonth(@RequestParam(value = "year") int year, @RequestParam(value = "month") int month) {
 
@@ -129,7 +126,7 @@ public class ReportController implements Serializable {
             int dailyhours = wwhours / 5;
             int zwZeit = wdi * dailyhours;
 
-            return String.valueOf(zwZeit + ":" + "00");
+            return zwZeit + ":" + "00";
         } catch (Exception e) {
             log.error(e.getLocalizedMessage());
             return null;
@@ -137,7 +134,7 @@ public class ReportController implements Serializable {
 
     }
 
-    @RequestMapping(value = "/v1/employeeData", produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "/v1/employeeData", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public List<Employee> getEmployeeData() {
         return employeeService.getAllEmployee();
