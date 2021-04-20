@@ -1,6 +1,8 @@
 # Arbeitszeiterfassung
 
-Einfache Applikation zum Nachverfolgen seiner eigenen Arbeitszeit. In Zeiten von HomeOffice kann dies einfach nebenbei auf einem kleinen Server installiert werden. Die Applikation hat intern eine kleine Derby Datenbank integriert.
+Einfache Applikation zum Nachverfolgen seiner eigenen Arbeitszeit.
+In Zeiten von HomeOffice kann dies einfach nebenbei auf einem kleinen Server installiert
+werden. Die Applikation hat intern eine kleine Derby Datenbank integriert.
 
 
 ## Anforderungen Server
@@ -78,7 +80,7 @@ Für die **Produktive** -variante wird der Port 9002 verwendet und kann wie folg
 
 ## REST Dokumentation 
 
-Link zu [API](./api.md) REST API Dokumentation.
+Link zur [API](./api.md) REST API Dokumentation.
 
 
 ## Applikations-Dokumentation
@@ -87,13 +89,14 @@ Link zu [API](./api.md) REST API Dokumentation.
 
 ### Home
 
-Über die Auswahl des Tages kann Start, Pause und Ende der Arbeitszeit eingetragen werden.  Die Berechnung der Nettoarbeitszeit erfolgt dann auf Minuten Basis
+Über die Auswahl des Tages kann Start, Pause und Ende der Arbeitszeit eingetragen werden.
+Die Berechnung der Nettoarbeitszeit erfolgt dann auf Minuten Basis.
 
 ![Eingabemaske der Arbeitszeit](./src/main/resources/images/workhours.png)
 
 ### Edit
 
-Über eine spzielle Admin-Rolle können schon eingegebene Daten noch einmal verändert werden.
+Über eine spezielle Admin-Rolle können schon eingegebene Daten noch einmal verändert werden.
 
 * _Rollenkonzept wurde bisher noch nicht implementiert_
 
@@ -103,23 +106,23 @@ Link zu [API](./api.md) REST API Dokumentation.
 ### Übersicht
 
 Der aktuelle Monat ist beim Öffnen des Tabs direkt Sichtbar, es können die letzten drei Monate als Bericht angezeigt werden.
-Am unteren Ende des Berichts wird die IST-Zeit und SOLL-Zeit angezeigt. Die Daten stammen aus dem Stammdaten im Admin bereich.
+Am unteren Ende des Berichts wird die IST-Zeit und SOLL-Zeit angezeigt. Die Daten stammen aus den Stammdaten im Admin bereich.
 
 ![Monatliche Übersicht](./src/main/resources/images/report.png)
 
-Zur korrekten Berechung der Arbeitstage wird noch eine andere Applikation zur Berechung der Feiertage und der Monatlichen Arbeitstage benötigt.
+Zur korrekten Berechnung der Arbeitstage wird noch eine andere Applikation zur Berechnung der Feiertage und der monatlichen Arbeitstage benötigt.
 
 ### Pausenmanagment
 
-Die Applikation hat ein kleine Möglichkeit per Start und Stop die genutzte Pausenzeit in Minuten anzuzeigen.
+Die Applikation hat eine kleine Möglichkeit per Start und Stop die genutzte Pausenzeit in Minuten anzuzeigen.
 
 ![Pausenmangement](./src/main/resources/images/pause.png)
 
 
 ### Admin
 
-Im Adminbereich kann der Name und die Arbeitszeiten, Maximale Arbeitszeit und Wöchentliche Arbeitszeit in Stunden eingetragen werden.
-Diese Daten werden beim erstellen des Berichts mit Berücksichtigt.
+Im Adminbereich kann der Name und die Arbeitszeiten, maximale Arbeitszeit und wöchentliche Arbeitszeit in Stunden eingetragen werden.
+Diese Daten werden beim Erstellen des Berichts mit berücksichtigt.
 
 
 
