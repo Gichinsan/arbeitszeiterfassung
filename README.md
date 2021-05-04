@@ -25,7 +25,7 @@ werden. Die Applikation hat intern eine kleine Derby Datenbank integriert.
 * cd target  
 * scp arbeitszeiterfassung-1.0-SNAPSHOT.war **<destination-server>**
 
-###Maven Abhängigkeiten
+### Maven Abhängigkeiten
 
       <dependency>
             <groupId>org.apache.derby</groupId>
