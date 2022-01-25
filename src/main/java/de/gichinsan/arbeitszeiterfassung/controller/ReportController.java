@@ -98,7 +98,7 @@ public class ReportController implements Serializable {
 
         RestTemplate rt = new RestTemplate();
         String fooResourceUrl
-                = "http://localhost:8889/v1/calcDayofMonth?year=" + year + "&month=" + month;
+                = "http://localhost:9889/v1/calcDayofMonth?year=" + year + "&month=" + month;
 
         ResponseEntity<String> response
                 = rt.getForEntity(fooResourceUrl, String.class);

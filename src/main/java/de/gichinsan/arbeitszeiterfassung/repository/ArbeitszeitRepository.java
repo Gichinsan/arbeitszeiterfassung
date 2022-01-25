@@ -25,15 +25,17 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
 
+
 @Repository
 public interface ArbeitszeitRepository extends JpaRepository<Workhours, Long> {
 
-    @Query("select r from Workhours r where r.date = :workDate")
+    @Query("select r from Workhours r where r.date = :workDate and YEAR(r.date) = 2022")
     Workhours findWorkhoursByDate(@Param("workDate") LocalDate date);
 
-    List<Workhours> findByMonthOrderByDate(int month);
+    @Query(value = "select r from Workhours r where r.month = :month and YEAR(r.date) = 2022 order by r.date")
+    List<Workhours> findByMonthAndByYear(@Param("month") int month);
 
-    @Query("select r from Workhours r where r.month = :month")
+    @Query("select r from Workhours r where r.month = :month and YEAR(r.date) = 2022")
     List<Workhours> findByMonthSumByWorkingHours(@Param("month") int month);
 
 
