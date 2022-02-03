@@ -29,14 +29,15 @@ import java.util.List;
 @Repository
 public interface ArbeitszeitRepository extends JpaRepository<Workhours, Long> {
 
-    @Query("select r from Workhours r where r.date = :workDate and YEAR(r.date) = 2022")
+    String YEARSTRING = "2022";
+
+    @Query("select r from Workhours r where r.date = :workDate and YEAR(r.date) = " + YEARSTRING)
     Workhours findWorkhoursByDate(@Param("workDate") LocalDate date);
 
-    @Query(value = "select r from Workhours r where r.month = :month and YEAR(r.date) = 2022 order by r.date")
+    @Query(value = "select r from Workhours r where r.month = :month and YEAR(r.date) = " + YEARSTRING + " order by r.date")
     List<Workhours> findByMonthAndByYear(@Param("month") int month);
 
-    @Query("select r from Workhours r where r.month = :month and YEAR(r.date) = 2022")
+    @Query("select r from Workhours r where r.month = :month and YEAR(r.date) = " + YEARSTRING)
     List<Workhours> findByMonthSumByWorkingHours(@Param("month") int month);
-
 
 }
