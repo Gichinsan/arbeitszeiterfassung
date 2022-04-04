@@ -63,6 +63,7 @@ public class EditController implements Serializable {
         uwh = new Workhours();
         try {
             uwh = service.findWorkhoursByDate(searcharbeitstag);
+
             setStartZeit(LocalTime.of(uwh.getStartTimeHours(), uwh.getStartTimeMinutes()));
             setPause(LocalTime.of(uwh.getDurationPauseHours(), uwh.getDurationPauseMinutes()));
             setEndZeit(LocalTime.of(uwh.getStopTimeHours(), uwh.getStopTimeMinutes()));

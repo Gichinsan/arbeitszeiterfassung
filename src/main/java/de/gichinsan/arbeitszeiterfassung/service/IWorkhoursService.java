@@ -31,7 +31,7 @@ public interface IWorkhoursService {
 
     Workhours findWorkhoursByDate(LocalDate date);
 
-    List<Workhours> findByMonthOrderByDate(int month);
+    List<Workhours> findByMonthOrderByDate(int month, int year);
 
     void delete(Workhours workhours);
 
