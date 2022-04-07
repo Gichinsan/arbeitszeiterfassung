@@ -89,7 +89,7 @@ public class ReportController implements Serializable {
             iMonth = 13 - month;
         }
         LocalDate prevMonth = LocalDate.of(year, iMonth, date.getDayOfMonth());
-        return service.findByMonthSumByWorkingHours(prevMonth.getMonth().getValue());
+        return service.findByMonthSumByWorkingHours(prevMonth.getMonth().getValue(), year);
     }
 
     @RequestMapping(value = "/v1/workdaysByMonth", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
