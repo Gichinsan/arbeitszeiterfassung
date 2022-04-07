@@ -38,7 +38,7 @@ public class WorkHoursService implements IWorkhoursService {
     @Override
     public boolean save(Workhours workhours) {
         //Check before save
-        var exists = repository.findWorkhoursByDate(workhours.getDate());
+        var exists = repository.findWorkhoursByDate(workhours.getDate(), workhours.getDate().getYear());
         if (exists == null) {
             repository.save(workhours);
             return true;
@@ -60,7 +60,7 @@ public class WorkHoursService implements IWorkhoursService {
 
     @Override
     public Workhours findWorkhoursByDate(LocalDate date) {
-        return repository.findWorkhoursByDate(date);
+        return repository.findWorkhoursByDate(date, date.getYear());
     }
 
     @Override
@@ -74,8 +74,8 @@ public class WorkHoursService implements IWorkhoursService {
     }
 
     @Override
-    public String findByMonthSumByWorkingHours(int month) {
-        List<Workhours> monthly = repository.findByMonthSumByWorkingHours(month);
+    public String findByMonthSumByWorkingHours(int month, int year) {
+        List<Workhours> monthly = repository.findByMonthSumByWorkingHours(month, year);
         int gesamtZeit = 0;
 
         for (int i = 0; i < monthly.size(); i++) {
