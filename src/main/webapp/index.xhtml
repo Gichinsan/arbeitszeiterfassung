@@ -3,6 +3,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns="http://www.w3.org/1999/xhtml"
 >
 
@@ -24,7 +25,7 @@
             </p:menuitem>
             <p:menuitem value="#{messages['menu.pause']}" outcome="/pause" icon="pi pi-search">
             </p:menuitem>
-            <p:menuitem value="#{messages['menu.info']}" url="/v1/info" icon="pi pi-briefcase">
+            <p:menuitem value="#{messages['menu.info']}" outcome="/info" icon="pi pi-briefcase">
             </p:menuitem>
             <p:menuitem value="#{messages['menu.admin']}" outcome="/admin" icon="pi pi-briefcase">
             </p:menuitem>
@@ -36,6 +37,11 @@
 
             <p:outputLabel for="button" value="#{messages['label.workingday']}"/>
             <p:datePicker id="button" value="#{workhours.arbeitstag}" showIcon="true" required="true"/>
+
+            <p:outputLabel for="options" value="Options"/>
+            <p:selectOneMenu id="options" value="#{workhours.worktype}">
+                <f:selectItems value="#{workhours.worktypeList}" var="type" itemValue="#{type.id}" itemLabel="#{type.longDesc}" />
+            </p:selectOneMenu>
 
             <p:outputLabel for="Starttime" value="#{messages['label.start']}"/>
             <p:outputPanel>

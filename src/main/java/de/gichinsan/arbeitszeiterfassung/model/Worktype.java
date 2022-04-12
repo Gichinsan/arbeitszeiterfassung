@@ -23,21 +23,16 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-@Table(name = "workhours")
-public class Workhours {
+@Table(name = "worktype")
+public class Worktype {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private LocalDate date;
-    private int month;
-    private int startTimeHours;
-    private int startTimeMinutes;
-    private int stopTimeHours;
-    private int stopTimeMinutes;
-    private int durationPauseHours;
-    private int durationPauseMinutes;
-    private String workingHours;
-    private int worktype;
+    @Column(name="LONGDESC")
+    private String longDesc;
+
+    @Column(name="SHORTDESC")
+    private String shortDesc;
 }
