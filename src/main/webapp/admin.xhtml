@@ -24,7 +24,7 @@
             </p:menuitem>
             <p:menuitem value="#{messages['menu.pause']}" outcome="/pause" icon="pi pi-search">
             </p:menuitem>
-            <p:menuitem value="#{messages['menu.info']}" url="/v1/info" icon="pi pi-briefcase">
+            <p:menuitem value="#{messages['menu.info']}" outcome="/info" icon="pi pi-briefcase">
             </p:menuitem>
             <p:menuitem value="#{messages['menu.admin']}" outcome="/admin" icon="pi pi-briefcase">
             </p:menuitem>
@@ -34,16 +34,16 @@
         </p>
         <h:panelGrid id="adminpanel" columns="2" cellpadding="5">
 
-            <h:outputText value="firstname"/>
+            <h:outputText value="#{messages['admin.firstname']}"/>
             <h:inputText id="firstname" value="#{adminctl.firstName}"/>
 
-            <h:outputText value="lastname"/>
+            <h:outputText value="#{messages['admin.lastname']}"/>
             <h:inputText id="lastname" value="#{adminctl.lastName}"/>
 
-            <h:outputText value="weeklyWorkinghours"/>
+            <h:outputText value="#{messages['admin.weeklyWorkinghours']}"/>
             <h:inputText id="weeklyWorkinghours" value="#{adminctl.weeklyWorkingshours}"/>
 
-            <h:outputText value="maxDailyWorkinghours"/>
+            <h:outputText value="#{messages['admin.maxDailyWorkinghours']}"/>
             <h:inputText id="maxDailyWorkinghours" value="#{adminctl.maxDailyWorkinghours}"/>
 
             <p:commandButton action="#{adminctl.saveAction}" value="#{messages['save']}" update="@form"

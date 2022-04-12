@@ -3,7 +3,6 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns="http://www.w3.org/1999/xhtml"
 >
 
@@ -12,9 +11,9 @@
 </h:head>
 
 <h:body>
-    <h:form id="exportPage">
+    <h:form id="infoPage">
         <p:growl id="growl" showDetail="true" sticky="true" skipDetailIfEqualsSummary="true"/>
-        <p:tabMenu activeIndex="3">
+        <p:tabMenu activeIndex="5">
             <p:menuitem value="#{messages['menu.home']}" url="/" icon="pi pi-star">
             </p:menuitem>
             <p:menuitem value="#{messages['menu.edit']}" outcome="/edit" icon="pi pi-search">
@@ -31,29 +30,14 @@
             </p:menuitem>
         </p:tabMenu>
         <p>
-            <h1>#{messages['page.title.export.h1']}</h1>
+            <h1>#{messages['page.title.h1.info']}</h1>
         </p>
-
-        <h:panelGrid id="adminpanel" columns="2" cellpadding="5">
-
-        <h:outputText value="#{messages['year']}"/>
-        <p:inputText value="#{export.myyear}" />
-
-        <h:outputText value="#{messages['month']}"/>
-        <p:inputText value="#{export.mymonth}" event="change"/>
+        <h:panelGrid id="infoanel" columns="1" cellpadding="5">
+        <h:outputText value="#{info.applicationName}"/>
+        <h:outputText value="#{info.buildVersion}"/>
+        <h:outputText value="#{info.buildTimestamp}"/>
         </h:panelGrid>
 
-        <h:panelGrid id="updatepanel" columns="2" cellpadding="5">
-            <h:commandButton onConfirmComplete="{export.csvaction}" value="#{messages['export.prepare']}">
-                <f:param value="#{export.mymonth}" name="month"></f:param>
-                <f:param value="#{export.myyear}" name="year"></f:param>
-            </h:commandButton>
-
-            <p:link id="csvexport" href="/v1/csvreport" value="#{messages['export.csv']}" update="growl">
-                <f:param value="#{export.mymonth}" name="month"></f:param>
-                <f:param value="#{export.myyear}" name="year"></f:param>
-            </p:link>
-        </h:panelGrid>
     </h:form>
 </h:body>
 </html>

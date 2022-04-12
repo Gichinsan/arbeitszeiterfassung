@@ -22,6 +22,9 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
@@ -95,5 +98,11 @@ public class AdminController implements Serializable {
     public void addErrorMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, null);
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    @RequestMapping(value = "/v1/employees", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Employee> getEmployees() {
+        return service.getAllEmployee();
     }
 }

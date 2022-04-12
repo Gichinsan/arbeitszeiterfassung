@@ -14,30 +14,27 @@
  * You should have received a copy of the GNU General Public License along with
  * arbeitszeiterfassung. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.gichinsan.arbeitszeiterfassung.model;
+package de.gichinsan.arbeitszeiterfassung.service;
 
-import lombok.Data;
+import de.gichinsan.arbeitszeiterfassung.model.Worktype;
+import de.gichinsan.arbeitszeiterfassung.repository.WorktypeRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
-import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.List;
 
-@Entity
-@Data
-@Table(name = "workhours")
-public class Workhours {
+@Service
+@Validated
+@RequiredArgsConstructor
+public class WorktypeService implements IWorktypeService {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Autowired
+    private WorktypeRepository repository;
 
-    private LocalDate date;
-    private int month;
-    private int startTimeHours;
-    private int startTimeMinutes;
-    private int stopTimeHours;
-    private int stopTimeMinutes;
-    private int durationPauseHours;
-    private int durationPauseMinutes;
-    private String workingHours;
-    private int worktype;
+    @Override
+    public List<Worktype> getAllWorktypes() {
+        return repository.findAll();
+    }
 }
