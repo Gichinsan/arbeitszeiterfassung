@@ -13,7 +13,7 @@ import org.springframework.validation.annotation.Validated;
 @Service
 @Validated
 @RequiredArgsConstructor
-public class UsertblService implements UserDetailsService {
+public class UsertblService implements UserDetailsService, IUsertblService {
 
     @Autowired
     private UsertblRepository usertblRepository;
@@ -29,5 +29,11 @@ public class UsertblService implements UserDetailsService {
         }
 
         return new UserPrincipal(user);
+    }
+
+    @Override
+    public Usertbl createNewUSer(Usertbl usertbl) {
+        usertblRepository.save(usertbl);
+        return usertbl;
     }
 }

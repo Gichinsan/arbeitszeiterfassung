@@ -17,10 +17,15 @@
 package de.gichinsan.arbeitszeiterfassung.controller;
 
 import de.gichinsan.arbeitszeiterfassung.model.Employee;
+import de.gichinsan.arbeitszeiterfassung.model.Role;
+import de.gichinsan.arbeitszeiterfassung.model.Roles;
+import de.gichinsan.arbeitszeiterfassung.model.Usertbl;
 import de.gichinsan.arbeitszeiterfassung.service.EmployeeService;
+import de.gichinsan.arbeitszeiterfassung.service.UsertblService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,7 +37,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Component(value = "adminctl")
@@ -43,11 +50,16 @@ public class AdminController implements Serializable {
 
     private String firstName;
     private String lastName;
+    private String usepwd;
     private String weeklyWorkingshours;
     private String maxDailyWorkinghours;
+    private Employee em = new Employee();
 
     @Autowired
     private EmployeeService service;
+
+    @Autowired
+    private UsertblService usertblService;
 
 
     @PostConstruct
@@ -75,12 +87,26 @@ public class AdminController implements Serializable {
      * @return
      */
     public String saveAction() {
-        Employee em = new Employee();
         em.setFirstName(getFirstName());
         em.setLastName(getLastName());
-        em.setWeeklyWorkinghours(Integer.parseInt(getWeeklyWorkingshours()));
-        em.setMaxDailyWorkinghours(Integer.parseInt(getMaxDailyWorkinghours()));
+        em.setWeeklyWorkinghours(Integer.parseInt(weeklyWorkingshours));
+        em.setMaxDailyWorkinghours(Integer.parseInt(maxDailyWorkinghours));
         service.save(em);
+
+        Usertbl utbl = new Usertbl();
+        Role role = new Role();
+        EnumSet<Roles> UserRole = EnumSet.of(Roles.USER);
+
+        utbl.setUsername(firstName);
+        String generatedSecuredPasswordHash = BCrypt.hashpw(lastName, BCrypt.gensalt(12));
+        utbl.setPassword(generatedSecuredPasswordHash);
+
+        role.setName("USER");
+        Set<Role> set = Set.of(role);
+        utbl.setRoles(set);
+        utbl.setEnabled(true);
+        usertblService.createNewUSer(utbl);
+
         return "/admin";
     }
 

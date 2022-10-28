@@ -14,8 +14,6 @@ INSERT INTO roles (name) VALUES ('ADMIN');
 
 --> User
 INSERT INTO usertbl (user_id, username, password, enabled) values (1, 'admin', '$2a$12$A7C/P3XXuwNoGHdy.K957.G75UzxDXtAUv9xIVDekI2K8bLFNNG8a', true);
-INSERT INTO usertbl (user_id, username, password, enabled) values (2, 'user', '$2a$12$A7C/P3XXuwNoGHdy.K957.G75UzxDXtAUv9xIVDekI2K8bLFNNG8a', true);
 
 --> User to Role
 INSERT INTO users_roles (user_id, role_id) VALUES (1, 4);
-INSERT INTO users_roles (user_id, role_id) VALUES (2, 1);
