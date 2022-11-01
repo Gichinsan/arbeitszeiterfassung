@@ -33,7 +33,7 @@ public class ExportController implements Serializable {
     public void getAllWorkhoursInCsv(HttpServletResponse servletResponse) throws IOException {
         servletResponse.setContentType("text/csv");
         servletResponse.addHeader("Content-Disposition", "attachment; filename=\"workhours.csv\"");
-        csvExportService.writeWorkhoursToCsv(servletResponse.getWriter(), getMyyear(), getMymonth());
+        csvExportService.writeWorkhoursToCsv(servletResponse.getWriter(), myyear, mymonth);
     }
 
     public void csvaction() throws IOException {
