@@ -46,6 +46,12 @@
             <h:outputText value="#{messages['admin.maxDailyWorkinghours']}"/>
             <h:inputText id="maxDailyWorkinghours" value="#{adminctl.maxDailyWorkinghours}"/>
 
+            <h:outputText value="#{messages['admin.username']}"/>
+            <h:inputText id="username" value="#{adminctl.username}"/>
+
+            <h:outputText value="#{messages['admin.password']}"/>
+            <h:inputSecret id="userpwd" value="#{adminctl.userpwd}"/>
+
             <p:commandButton action="#{adminctl.saveAction}" value="#{messages['save']}" update="@form"
                              style="margin-right:20px;"
                              styleClass="ui-priority-primary"/>

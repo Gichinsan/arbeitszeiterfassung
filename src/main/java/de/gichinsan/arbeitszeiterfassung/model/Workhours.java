@@ -16,6 +16,10 @@
  */
 package de.gichinsan.arbeitszeiterfassung.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -30,7 +34,10 @@ public class Workhours {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate date;
+
     private int month;
     private int startTimeHours;
     private int startTimeMinutes;
