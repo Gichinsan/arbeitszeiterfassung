@@ -16,26 +16,26 @@
  */
 package de.gichinsan.arbeitszeiterfassung.controller;
 
-import de.gichinsan.arbeitszeiterfassung.model.Employee;
-import de.gichinsan.arbeitszeiterfassung.model.Role;
-import de.gichinsan.arbeitszeiterfassung.model.Roles;
-import de.gichinsan.arbeitszeiterfassung.model.Usertbl;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import de.gichinsan.arbeitszeiterfassung.model.*;
 import de.gichinsan.arbeitszeiterfassung.service.EmployeeService;
 import de.gichinsan.arbeitszeiterfassung.service.UsertblService;
+import de.gichinsan.arbeitszeiterfassung.service.WorkHoursService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.EnumSet;
 import java.util.List;
@@ -50,7 +50,10 @@ public class AdminController implements Serializable {
 
     private String firstName;
     private String lastName;
-    private String usepwd;
+
+    private String username;
+
+    private String userpwd;
     private String weeklyWorkingshours;
     private String maxDailyWorkinghours;
     private Employee em = new Employee();
@@ -60,6 +63,9 @@ public class AdminController implements Serializable {
 
     @Autowired
     private UsertblService usertblService;
+
+    @Autowired
+    private WorkHoursService workHoursService;
 
 
     @PostConstruct
@@ -97,8 +103,8 @@ public class AdminController implements Serializable {
         Role role = new Role();
         EnumSet<Roles> UserRole = EnumSet.of(Roles.USER);
 
-        utbl.setUsername(firstName);
-        String generatedSecuredPasswordHash = BCrypt.hashpw(lastName, BCrypt.gensalt(12));
+        utbl.setUsername(username);
+        String generatedSecuredPasswordHash = BCrypt.hashpw(userpwd, BCrypt.gensalt(12));
         utbl.setPassword(generatedSecuredPasswordHash);
 
         role.setName("USER");
@@ -130,5 +136,28 @@ public class AdminController implements Serializable {
     @ResponseBody
     public List<Employee> getEmployees() {
         return service.getAllEmployee();
+    }
+
+    @PostMapping(value = "/v1/uploadreport", consumes = "multipart/form-data")
+    public String uploadMultipart(@RequestParam("file") MultipartFile file) throws IOException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        TypeReference<List<Workhours>> typeReference = new TypeReference<List<Workhours>>() {
+        };
+        InputStream inputStream = file.getInputStream();
+        try {
+            List<Workhours> workhours = mapper.readValue(inputStream, typeReference);
+
+            for (Workhours values : workhours) {
+                workHoursService.save(values);
+            }
+
+            log.debug("Report Saved!");
+        } catch (IOException e) {
+            log.error("Unable to save report: " + e.getMessage());
+        }
+
+        // workHoursService.save(CsvUtils.read(Workhours.class, file.getInputStream()));
+        return "/overview";
     }
 }
