@@ -40,7 +40,7 @@
 
             <p:outputLabel for="options" value="Options"/>
             <p:selectOneMenu id="options" value="#{workhours.worktype}">
-                <f:selectItems value="#{workhours.worktypeList}" var="type" itemValue="#{type.id}" itemLabel="#{type.longDesc}" />
+                <f:selectItems value="#{workhours.worktypeList}" var="type" itemValue="#{type.worktype_id}" itemLabel="#{type.longDesc}" />
             </p:selectOneMenu>
 
             <p:outputLabel for="Starttime" value="#{messages['label.start']}"/>

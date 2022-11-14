@@ -19,7 +19,6 @@ package de.gichinsan.arbeitszeiterfassung.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Data
@@ -27,12 +26,13 @@ import java.time.LocalDate;
 public class Worktype {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name = "worktype_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer worktype_id;
 
-    @Column(name="LONGDESC")
+    @Column(name = "LONGDESC")
     private String longDesc;
 
-    @Column(name="SHORTDESC")
+    @Column(name = "SHORTDESC")
     private String shortDesc;
 }

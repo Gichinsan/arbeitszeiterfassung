@@ -50,9 +50,11 @@ public class WorkhoursController implements Serializable {
     private LocalTime minTime;
     private LocalTime maxTime;
     private LocalTime pause;
+
     private String berechnung;
+
     private List<Worktype> worktypeList;
-    private int worktype;
+    private Integer worktype;
 
     @Autowired
     private WorkHoursService service;
