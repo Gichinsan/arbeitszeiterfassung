@@ -18,7 +18,10 @@ package de.gichinsan.arbeitszeiterfassung.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.gichinsan.arbeitszeiterfassung.model.*;
+import de.gichinsan.arbeitszeiterfassung.model.Employee;
+import de.gichinsan.arbeitszeiterfassung.model.Role;
+import de.gichinsan.arbeitszeiterfassung.model.Usertbl;
+import de.gichinsan.arbeitszeiterfassung.model.Workhours;
 import de.gichinsan.arbeitszeiterfassung.service.EmployeeService;
 import de.gichinsan.arbeitszeiterfassung.service.UsertblService;
 import de.gichinsan.arbeitszeiterfassung.service.WorkHoursService;
@@ -37,7 +40,6 @@ import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
@@ -74,7 +76,7 @@ public class AdminController implements Serializable {
     }
 
     /**
-     * @return
+     * @return String /admin
      */
     public String showValues() {
         try {
@@ -90,7 +92,7 @@ public class AdminController implements Serializable {
     }
 
     /**
-     * @return
+     * @return String /admin
      */
     public String saveAction() {
         em.setFirstName(getFirstName());
@@ -101,7 +103,6 @@ public class AdminController implements Serializable {
 
         Usertbl utbl = new Usertbl();
         Role role = new Role();
-        EnumSet<Roles> UserRole = EnumSet.of(Roles.USER);
 
         utbl.setUsername(username);
         String generatedSecuredPasswordHash = BCrypt.hashpw(userpwd, BCrypt.gensalt(12));
@@ -117,7 +118,7 @@ public class AdminController implements Serializable {
     }
 
     /**
-     * @param summary
+     * @param summary as String
      */
     public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
@@ -125,24 +126,34 @@ public class AdminController implements Serializable {
     }
 
     /**
-     * @param summary
+     * @param summary as String
      */
     public void addErrorMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, null);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
+    /**
+     * getEmployees<br>
+     *
+     * @return List AllEmployees
+     */
     @RequestMapping(value = "/v1/employees", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
     public List<Employee> getEmployees() {
         return service.getAllEmployee();
     }
 
+    /**
+     * @param file as multipart/form-data
+     * @return string /overview
+     * @throws IOException If unable to save
+     */
     @PostMapping(value = "/v1/uploadreport", consumes = "multipart/form-data")
     public String uploadMultipart(@RequestParam("file") MultipartFile file) throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
-        TypeReference<List<Workhours>> typeReference = new TypeReference<List<Workhours>>() {
+        TypeReference<List<Workhours>> typeReference = new TypeReference<>() {
         };
         InputStream inputStream = file.getInputStream();
         try {
@@ -156,8 +167,6 @@ public class AdminController implements Serializable {
         } catch (IOException e) {
             log.error("Unable to save report: " + e.getMessage());
         }
-
-        // workHoursService.save(CsvUtils.read(Workhours.class, file.getInputStream()));
         return "/overview";
     }
 }
