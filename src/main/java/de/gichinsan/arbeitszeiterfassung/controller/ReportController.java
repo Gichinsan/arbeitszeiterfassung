@@ -45,8 +45,8 @@ public class ReportController implements Serializable {
 
     @RequestMapping(value = "/v1/reportByMonth", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
-    public List<Workhours> getWorkinghoursByMonth(@RequestParam(value = "month") int month) {
-        return service.findByMonthOrderByDate(month);
+    public List<Workhours> getWorkinghoursByMonth(@RequestParam(value = "month") int month, @RequestParam(value = "year") int year) {
+        return service.findByMonthOrderByDate(month, year);
     }
 
     public String getMonthByName(String value) {
@@ -70,7 +70,7 @@ public class ReportController implements Serializable {
             iMonth = 13 - Integer.parseInt(value);
         }
         LocalDate prevMonth = LocalDate.of(year, iMonth, date.getDayOfMonth());
-        return service.findByMonthOrderByDate(prevMonth.getMonth().getValue());
+        return service.findByMonthOrderByDate(prevMonth.getMonth().getValue(), year);
     }
 
     public String getTabIndex() {
@@ -89,7 +89,7 @@ public class ReportController implements Serializable {
             iMonth = 13 - month;
         }
         LocalDate prevMonth = LocalDate.of(year, iMonth, date.getDayOfMonth());
-        return service.findByMonthSumByWorkingHours(prevMonth.getMonth().getValue());
+        return service.findByMonthSumByWorkingHours(prevMonth.getMonth().getValue(), year);
     }
 
     @RequestMapping(value = "/v1/workdaysByMonth", produces = "application/json; charset=UTF-8", method = RequestMethod.GET)
@@ -98,7 +98,7 @@ public class ReportController implements Serializable {
 
         RestTemplate rt = new RestTemplate();
         String fooResourceUrl
-                = "http://localhost:8889/v1/calcDayofMonth?year=" + year + "&month=" + month;
+                = "http://localhost:9889/v1/calcDayofMonth?year=" + year + "&month=" + month;
 
         ResponseEntity<String> response
                 = rt.getForEntity(fooResourceUrl, String.class);

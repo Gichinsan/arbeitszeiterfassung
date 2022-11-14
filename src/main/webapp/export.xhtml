@@ -3,6 +3,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns="http://www.w3.org/1999/xhtml"
 >
 
@@ -11,9 +12,9 @@
 </h:head>
 
 <h:body>
-    <h:form id="adminPage">
+    <h:form id="exportPage">
         <p:growl id="growl" showDetail="true" sticky="true" skipDetailIfEqualsSummary="true"/>
-        <p:tabMenu activeIndex="6">
+        <p:tabMenu activeIndex="3">
             <p:menuitem value="#{messages['menu.home']}" url="/" icon="pi pi-star">
             </p:menuitem>
             <p:menuitem value="#{messages['menu.edit']}" outcome="/edit" icon="pi pi-search">
@@ -32,32 +33,28 @@
             </p:menuitem>
         </p:tabMenu>
         <p>
-            <h1>#{messages['page.title.admin.h1']}</h1>
+            <h1>#{messages['page.title.export.h1']}</h1>
         </p>
+
         <h:panelGrid id="adminpanel" columns="2" cellpadding="5">
 
-            <h:outputText value="#{messages['admin.firstname']}"/>
-            <h:inputText id="firstname" value="#{adminctl.firstName}"/>
+        <h:outputText value="#{messages['year']}"/>
+        <p:inputText value="#{export.myyear}" />
 
-            <h:outputText value="#{messages['admin.lastname']}"/>
-            <h:inputText id="lastname" value="#{adminctl.lastName}"/>
+        <h:outputText value="#{messages['month']}"/>
+        <p:inputText value="#{export.mymonth}" event="change"/>
+        </h:panelGrid>
 
-            <h:outputText value="#{messages['admin.weeklyWorkinghours']}"/>
-            <h:inputText id="weeklyWorkinghours" value="#{adminctl.weeklyWorkingshours}"/>
+        <h:panelGrid id="updatepanel" columns="2" cellpadding="5">
+            <h:commandButton onConfirmComplete="{export.csvaction}" value="#{messages['export.prepare']}">
+                <f:param value="#{export.mymonth}" name="month"></f:param>
+                <f:param value="#{export.myyear}" name="year"></f:param>
+            </h:commandButton>
 
-            <h:outputText value="#{messages['admin.maxDailyWorkinghours']}"/>
-            <h:inputText id="maxDailyWorkinghours" value="#{adminctl.maxDailyWorkinghours}"/>
-
-            <h:outputText value="#{messages['admin.username']}"/>
-            <h:inputText id="username" value="#{adminctl.username}"/>
-
-            <h:outputText value="#{messages['admin.password']}"/>
-            <h:inputSecret id="userpwd" value="#{adminctl.userpwd}"/>
-
-            <p:commandButton action="#{adminctl.saveAction}" value="#{messages['save']}" update="@form"
-                             style="margin-right:20px;"
-                             styleClass="ui-priority-primary"/>
-
+            <p:link id="csvexport" href="/v1/csvreport" value="#{messages['export.csv']}" update="growl">
+                <f:param value="#{export.mymonth}" name="month"></f:param>
+                <f:param value="#{export.myyear}" name="year"></f:param>
+            </p:link>
         </h:panelGrid>
     </h:form>
 </h:body>

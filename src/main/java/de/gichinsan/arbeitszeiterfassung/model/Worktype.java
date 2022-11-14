@@ -14,26 +14,25 @@
  * You should have received a copy of the GNU General Public License along with
  * arbeitszeiterfassung. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.gichinsan.arbeitszeiterfassung.service;
+package de.gichinsan.arbeitszeiterfassung.model;
 
-import de.gichinsan.arbeitszeiterfassung.model.Workhours;
+import lombok.Data;
 
-import java.time.LocalDate;
-import java.util.List;
+import javax.persistence.*;
 
-public interface IWorkhoursService {
+@Entity
+@Data
+@Table(name = "worktype")
+public class Worktype {
 
-    boolean save(Workhours workhours);
+    @Id
+    @Column(name = "worktype_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer worktype_id;
 
-    boolean saveUpdate(Workhours workhours);
+    @Column(name = "LONGDESC")
+    private String longDesc;
 
-    List<Workhours> getAllWorkinghours();
-
-    Workhours findWorkhoursByDate(LocalDate date);
-
-    List<Workhours> findByMonthOrderByDate(int month, int year);
-
-    void delete(Workhours workhours);
-
-    String findByMonthSumByWorkingHours(int month, int year);
+    @Column(name = "SHORTDESC")
+    private String shortDesc;
 }

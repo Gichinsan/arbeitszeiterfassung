@@ -16,24 +16,25 @@
  */
 package de.gichinsan.arbeitszeiterfassung.service;
 
-import de.gichinsan.arbeitszeiterfassung.model.Workhours;
+import de.gichinsan.arbeitszeiterfassung.model.Worktype;
+import de.gichinsan.arbeitszeiterfassung.repository.WorktypeRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
-import java.time.LocalDate;
 import java.util.List;
 
-public interface IWorkhoursService {
+@Service
+@Validated
+@RequiredArgsConstructor
+public class WorktypeService implements IWorktypeService {
 
-    boolean save(Workhours workhours);
+    @Autowired
+    private WorktypeRepository repository;
 
-    boolean saveUpdate(Workhours workhours);
-
-    List<Workhours> getAllWorkinghours();
-
-    Workhours findWorkhoursByDate(LocalDate date);
-
-    List<Workhours> findByMonthOrderByDate(int month, int year);
-
-    void delete(Workhours workhours);
-
-    String findByMonthSumByWorkingHours(int month, int year);
+    @Override
+    public List<Worktype> getAllWorktypes() {
+        return repository.findAll();
+    }
 }

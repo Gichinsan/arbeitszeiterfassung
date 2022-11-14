@@ -125,4 +125,13 @@ Im Adminbereich kann der Name und die Arbeitszeiten, maximale Arbeitszeit und w√
 Diese Daten werden beim Erstellen des Berichts mit ber√ºcksichtigt.
 
 
+###
 
+Not need anymore in pom.xml
+
+ <dependency>
+            <groupId>com.srpago.sprinter</groupId>
+            <artifactId>sprinter</artifactId>
+            <version>1.4.3</version>
+            <scope>compile</scope>
+        </dependency>

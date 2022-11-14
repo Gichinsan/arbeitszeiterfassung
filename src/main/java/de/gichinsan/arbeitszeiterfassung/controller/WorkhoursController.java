@@ -17,7 +17,9 @@
 package de.gichinsan.arbeitszeiterfassung.controller;
 
 import de.gichinsan.arbeitszeiterfassung.model.Workhours;
+import de.gichinsan.arbeitszeiterfassung.model.Worktype;
 import de.gichinsan.arbeitszeiterfassung.service.WorkHoursService;
+import de.gichinsan.arbeitszeiterfassung.service.WorktypeService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,7 @@ import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 @Component(value = "workhours")
@@ -47,10 +50,17 @@ public class WorkhoursController implements Serializable {
     private LocalTime minTime;
     private LocalTime maxTime;
     private LocalTime pause;
+
     private String berechnung;
+
+    private List<Worktype> worktypeList;
+    private Integer worktype;
 
     @Autowired
     private WorkHoursService service;
+
+    @Autowired
+    private WorktypeService worktypeService;
 
     @PostConstruct
     public void init() {
@@ -58,6 +68,13 @@ public class WorkhoursController implements Serializable {
         maxTime = LocalTime.of(19, 0);
     }
 
+    /**
+     *
+     * @return
+     */
+    public List<Worktype> getWorktypeList(){
+        return worktypeService.getAllWorktypes();
+    }
 
     /**
      * @return
@@ -86,6 +103,7 @@ public class WorkhoursController implements Serializable {
 
         Workhours wh = new Workhours();
         wh.setDate(arbeitstag);
+        wh.setWorktype(worktype);
         wh.setMonth(arbeitstag.getMonthValue());
         wh.setStartTimeHours(startZeit.getHour());
         wh.setStartTimeMinutes(startZeit.getMinute());
