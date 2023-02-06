@@ -3,6 +3,8 @@ package de.gichinsan.arbeitszeiterfassung.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -10,6 +12,7 @@ import javax.persistence.*;
 public class Employee {
 
     @Id
+    @Column(name = "emp_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -17,6 +20,7 @@ public class Employee {
     private String lastName;
     private int weeklyWorkinghours;
     private int maxDailyWorkinghours;
+
 
 
 }
