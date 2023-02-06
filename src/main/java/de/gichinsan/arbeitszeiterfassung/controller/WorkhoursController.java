@@ -18,6 +18,7 @@ package de.gichinsan.arbeitszeiterfassung.controller;
 
 import de.gichinsan.arbeitszeiterfassung.model.Workhours;
 import de.gichinsan.arbeitszeiterfassung.model.Worktype;
+import de.gichinsan.arbeitszeiterfassung.service.EmployeeService;
 import de.gichinsan.arbeitszeiterfassung.service.WorkHoursService;
 import de.gichinsan.arbeitszeiterfassung.service.WorktypeService;
 import lombok.Data;
@@ -62,6 +63,9 @@ public class WorkhoursController implements Serializable {
     @Autowired
     private WorktypeService worktypeService;
 
+    @Autowired
+    private EmployeeService employeeService;
+
     @PostConstruct
     public void init() {
         minTime = LocalTime.of(6, 0);
@@ -69,10 +73,9 @@ public class WorkhoursController implements Serializable {
     }
 
     /**
-     *
      * @return
      */
-    public List<Worktype> getWorktypeList(){
+    public List<Worktype> getWorktypeList() {
         return worktypeService.getAllWorktypes();
     }
 
@@ -102,6 +105,8 @@ public class WorkhoursController implements Serializable {
         setBerechnung(realDiff);
 
         Workhours wh = new Workhours();
+        log.info(employeeService.getAllEmployee().get(0).toString());
+        wh.setEmployee_id(employeeService.getAllEmployee().get(0).getId());
         wh.setDate(arbeitstag);
         wh.setWorktype(worktype);
         wh.setMonth(arbeitstag.getMonthValue());

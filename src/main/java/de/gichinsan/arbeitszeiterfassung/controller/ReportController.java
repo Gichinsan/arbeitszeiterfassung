@@ -4,11 +4,13 @@ import de.gichinsan.arbeitszeiterfassung.model.Employee;
 import de.gichinsan.arbeitszeiterfassung.model.Workhours;
 import de.gichinsan.arbeitszeiterfassung.service.EmployeeService;
 import de.gichinsan.arbeitszeiterfassung.service.WorkHoursService;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -19,6 +21,8 @@ import java.util.List;
 @RestController
 @Component(value = "report")
 @Slf4j
+@Transactional
+@Data
 public class ReportController implements Serializable {
 
     private String monthNow;

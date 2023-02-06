@@ -1,5 +1,7 @@
 -->Initial Load
 ---truncate table worktypes;
+---truncate table employee;
+
 -->Worktype
 INSERT INTO worktype (worktype_id,longDesc, shortDesc) values (1,'Arbeitszeit', 'Arbeitszeit');
 INSERT INTO worktype (worktype_id,longDesc, shortDesc) values (2,'Urlaub', 'Urlaub');

@@ -31,6 +31,7 @@ import java.time.LocalDate;
 public class Workhours {
 
     @Id
+    @Column(name = "work_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -47,4 +48,6 @@ public class Workhours {
     private int durationPauseMinutes;
     private String workingHours;
     private int worktype;
+    private long employee_id;
+
 }

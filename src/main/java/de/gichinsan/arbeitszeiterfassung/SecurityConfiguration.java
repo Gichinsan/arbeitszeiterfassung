@@ -10,8 +10,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.firewall.HttpFirewall;
+import org.springframework.security.web.firewall.StrictHttpFirewall;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.Arrays;
 
 @EnableWebSecurity
 @Configuration
@@ -51,5 +55,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
                 .formLogin().permitAll()
                 .and()
                 .logout().permitAll();
+
+    }
+
+    @Bean
+    public HttpFirewall configureFirewall() {
+        StrictHttpFirewall strictHttpFirewall = new StrictHttpFirewall();
+        strictHttpFirewall
+                .setAllowedHttpMethods(Arrays.asList("GET", "POST"));
+        strictHttpFirewall.setAllowBackSlash(true);
+        strictHttpFirewall.setAllowUrlEncodedSlash(true);
+        return strictHttpFirewall;
     }
 }

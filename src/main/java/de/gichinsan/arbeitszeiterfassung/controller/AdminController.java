@@ -37,6 +37,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -47,14 +48,13 @@ import java.util.Set;
 @Component(value = "adminctl")
 @RestController
 @RequestScoped
+@Transactional
 @Slf4j
 public class AdminController implements Serializable {
 
     private String firstName;
     private String lastName;
-
     private String username;
-
     private String userpwd;
     private String weeklyWorkingshours;
     private String maxDailyWorkinghours;
