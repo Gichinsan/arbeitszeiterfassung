@@ -1,1 +1,49 @@
-<h1>Welcome to my project Arbeitszeiterfassung</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Github pages für kleine Spring Boot Hobby Projekte">
+    <meta name="keywords" content="Github, Spring Boot, Java, API">
+    <meta name="author" content="Gichinsan">
+    <meta name="robots" content="index, follow">
+    <title>House of Hobbyprojects</title>
+    <link rel="stylesheet" href="https://gichinsan.github.io/style.css">
+    <link rel="icon" href="data:,">
+    <script src="https://gichinsan.github.io/repos.js"></script>
+    <script src="https://gichinsan.github.io/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
+</head>
+<body>
+<div id="header"></div>
+
+<main>
+    <div class="aboutbg">
+        <h1>Welcome to my project Arbeitszeiterfassung</h1>
+
+        <script>
+    $(function() {
+  $.get('https://api.github.com/repos/Gichinsan/arbeitszeiterfassung/readme', function(response) {
+    var converter = new showdown.Converter(),
+        html = converter.makeHtml(atob(response.content));
+    $('#readme').html(html);
+  });
+});
+
+        </script>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <p>
+            &copy;
+            <script>document.write(new Date().getFullYear())</script>
+            gichinsan.github.io. Alle Rechte vorbehalten.
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>
