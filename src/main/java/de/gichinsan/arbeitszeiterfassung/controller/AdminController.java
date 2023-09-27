@@ -114,6 +114,7 @@ public class AdminController implements Serializable {
         utbl.setEnabled(true);
         usertblService.createNewUSer(utbl);
 
+        addMessage("Neuer User erstellt! " + username);
         return "/admin";
     }
 
