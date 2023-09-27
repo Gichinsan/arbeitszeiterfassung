@@ -70,6 +70,7 @@ public class WorkhoursController implements Serializable {
     public void init() {
         minTime = LocalTime.of(6, 0);
         maxTime = LocalTime.of(19, 0);
+        setPause(LocalTime.of(00,50));
     }
 
     /**
