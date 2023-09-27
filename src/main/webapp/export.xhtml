@@ -38,11 +38,11 @@
 
         <h:panelGrid id="adminpanel" columns="2" cellpadding="5">
 
-        <h:outputText value="#{messages['year']}"/>
-        <p:inputText value="#{export.myyear}" />
+        <p:outputLabel for="myyear" value="#{messages['year']}"/>
+        <p:inputText id="myyear" value="#{export.myyear}" />
 
-        <h:outputText value="#{messages['month']}"/>
-        <p:inputText value="#{export.mymonth}" event="change"/>
+        <p:outputLabel for="mymonth" value="#{messages['month']}"/>
+        <p:inputText id="mymonth" value="#{export.mymonth}" event="change"/>
         </h:panelGrid>
 
         <h:panelGrid id="updatepanel" columns="2" cellpadding="5">

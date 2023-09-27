@@ -36,23 +36,23 @@
         </p>
         <h:panelGrid id="adminpanel" columns="2" cellpadding="5">
 
-            <h:outputText value="#{messages['admin.firstname']}"/>
-            <h:inputText id="firstname" value="#{adminctl.firstName}"/>
+            <p:outputLabel for="firstname" value="#{messages['admin.firstname']}"/>
+            <p:inputText id="firstname" value="#{adminctl.firstName}"/>
 
-            <h:outputText value="#{messages['admin.lastname']}"/>
-            <h:inputText id="lastname" value="#{adminctl.lastName}"/>
+            <p:outputLabel for="lastname" value="#{messages['admin.lastname']}"/>
+            <p:inputText id="lastname" value="#{adminctl.lastName}"/>
 
-            <h:outputText value="#{messages['admin.weeklyWorkinghours']}"/>
-            <h:inputText id="weeklyWorkinghours" value="#{adminctl.weeklyWorkingshours}"/>
+            <p:outputLabel for="weeklyWorkinghours" value="#{messages['admin.weeklyWorkinghours']}"/>
+            <p:inputText id="weeklyWorkinghours" value="#{adminctl.weeklyWorkingshours}"/>
 
-            <h:outputText value="#{messages['admin.maxDailyWorkinghours']}"/>
-            <h:inputText id="maxDailyWorkinghours" value="#{adminctl.maxDailyWorkinghours}"/>
+            <p:outputLabel for="maxDailyWorkinghours" value="#{messages['admin.maxDailyWorkinghours']}"/>
+            <p:inputText id="maxDailyWorkinghours" value="#{adminctl.maxDailyWorkinghours}"/>
 
-            <h:outputText value="#{messages['admin.username']}"/>
-            <h:inputText id="username" value="#{adminctl.username}"/>
+            <p:outputLabel for="username" value="#{messages['admin.username']}"/>
+            <p:inputText id="username" value="#{adminctl.username}"/>
 
-            <h:outputText value="#{messages['admin.password']}"/>
-            <h:inputSecret id="userpwd" value="#{adminctl.userpwd}"/>
+            <p:outputLabel for="userpwd" value="#{messages['admin.password']}"/>
+            <p:password id="userpwd" value="#{adminctl.userpwd}"/>
 
             <p:commandButton action="#{adminctl.saveAction}" value="#{messages['save']}" update="@form"
                              style="margin-right:20px;"
