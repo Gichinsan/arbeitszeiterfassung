@@ -17,7 +17,7 @@ public enum Roles {
 
     private final String label;
 
-    private Roles(String label) {
+    Roles(String label) {
         this.label = label;
     }
 

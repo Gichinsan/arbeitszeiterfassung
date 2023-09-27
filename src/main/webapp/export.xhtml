@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:h="http://java.sun.com/jsf/html"
+<html lang="en" xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns="http://www.w3.org/1999/xhtml"
@@ -47,13 +47,13 @@
 
         <h:panelGrid id="updatepanel" columns="2" cellpadding="5">
             <h:commandButton onConfirmComplete="{export.csvaction}" value="#{messages['export.prepare']}">
-                <f:param value="#{export.mymonth}" name="month"></f:param>
-                <f:param value="#{export.myyear}" name="year"></f:param>
+                <f:param value="#{export.mymonth}" name="month"/>
+                <f:param value="#{export.myyear}" name="year"/>
             </h:commandButton>
 
             <p:link id="csvexport" href="/v1/csvreport" value="#{messages['export.csv']}" update="growl">
-                <f:param value="#{export.mymonth}" name="month"></f:param>
-                <f:param value="#{export.myyear}" name="year"></f:param>
+                <f:param value="#{export.mymonth}" name="month"/>
+                <f:param value="#{export.myyear}" name="year"/>
             </p:link>
         </h:panelGrid>
     </h:form>

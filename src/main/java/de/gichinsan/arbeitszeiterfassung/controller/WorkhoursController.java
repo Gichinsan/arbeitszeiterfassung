@@ -73,7 +73,7 @@ public class WorkhoursController implements Serializable {
 
         log.error("Get Employees --> " + employeeService.getAllEmployee().size());
 
-        if (employeeService.getAllEmployee().size() > 0) {
+        if (!employeeService.getAllEmployee().isEmpty()) {
             pauseDefValue = employeeService.getAllEmployee().get(0).getPausemgmt();
             log.error("Get Employees Pause --> " + pauseDefValue);
 
@@ -87,7 +87,8 @@ public class WorkhoursController implements Serializable {
     }
 
     /**
-     * @return
+     *
+     * @return List of Worktypes
      */
     public List<Worktype> getWorktypeList() {
         return worktypeService.getAllWorktypes();
