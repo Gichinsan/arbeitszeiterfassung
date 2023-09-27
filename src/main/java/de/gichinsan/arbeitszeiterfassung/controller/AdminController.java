@@ -41,6 +41,7 @@ import javax.transaction.Transactional;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
 
@@ -59,6 +60,7 @@ public class AdminController implements Serializable {
     private String weeklyWorkingshours;
     private String maxDailyWorkinghours;
     private Employee em = new Employee();
+    private String pausemgmt;
 
     @Autowired
     private EmployeeService service;
@@ -85,6 +87,7 @@ public class AdminController implements Serializable {
             setLastName(employeeList.get(0).getLastName());
             setWeeklyWorkingshours(String.valueOf(employeeList.get(0).getWeeklyWorkinghours()));
             setMaxDailyWorkinghours(String.valueOf(employeeList.get(0).getMaxDailyWorkinghours()));
+            setPausemgmt(String.valueOf(employeeList.get(0).getPausemgmt()));
         } catch (Exception e) {
             log.error(e.getLocalizedMessage());
         }
@@ -99,6 +102,7 @@ public class AdminController implements Serializable {
         em.setLastName(getLastName());
         em.setWeeklyWorkinghours(Integer.parseInt(weeklyWorkingshours));
         em.setMaxDailyWorkinghours(Integer.parseInt(maxDailyWorkinghours));
+        em.setPausemgmt(Integer.parseInt(pausemgmt));
         service.save(em);
 
         Usertbl utbl = new Usertbl();

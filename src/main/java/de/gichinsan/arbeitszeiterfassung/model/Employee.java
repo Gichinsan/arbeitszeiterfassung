@@ -20,6 +20,7 @@ public class Employee {
     private String lastName;
     private int weeklyWorkinghours;
     private int maxDailyWorkinghours;
+    private int pausemgmt;
 
 
 

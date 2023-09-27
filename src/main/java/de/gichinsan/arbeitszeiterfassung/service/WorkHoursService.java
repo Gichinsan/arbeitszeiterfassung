@@ -18,6 +18,7 @@ package de.gichinsan.arbeitszeiterfassung.service;
 
 import de.gichinsan.arbeitszeiterfassung.model.Workhours;
 import de.gichinsan.arbeitszeiterfassung.repository.ArbeitszeitRepository;
+import de.gichinsan.arbeitszeiterfassung.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,6 +58,7 @@ public class WorkHoursService implements IWorkhoursService {
     public List<Workhours> getAllWorkinghours() {
         return repository.findAll();
     }
+
 
     @Override
     public Workhours findWorkhoursByDate(LocalDate date) {

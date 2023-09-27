@@ -68,9 +68,22 @@ public class WorkhoursController implements Serializable {
 
     @PostConstruct
     public void init() {
+
+        int pauseDefValue;
+
+        log.error("Get Employees --> " + employeeService.getAllEmployee().size());
+
+        if (employeeService.getAllEmployee().size() > 0) {
+            pauseDefValue = employeeService.getAllEmployee().get(0).getPausemgmt();
+            log.error("Get Employees Pause --> " + pauseDefValue);
+
+        } else {
+            pauseDefValue = 50;
+        }
+
         minTime = LocalTime.of(6, 0);
         maxTime = LocalTime.of(19, 0);
-        setPause(LocalTime.of(00,50));
+        setPause(LocalTime.of(0, pauseDefValue));
     }
 
     /**
@@ -123,7 +136,7 @@ public class WorkhoursController implements Serializable {
             setArbeitstag(null);
             setStartZeit(null);
             setEndZeit(null);
-            setPause(null);
+            setPause(LocalTime.of(0, employeeService.getAllEmployee().get(0).getPausemgmt()));
             setBerechnung(null);
             return "/overview";
         } else {
