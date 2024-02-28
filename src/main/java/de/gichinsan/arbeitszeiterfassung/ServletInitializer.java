@@ -17,13 +17,25 @@
 package de.gichinsan.arbeitszeiterfassung;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-public class ServletInitializer extends SpringBootServletInitializer {
+import javax.faces.webapp.FacesServlet;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+
+public class ServletInitializer extends SpringBootServletInitializer implements ServletContextInitializer {
+
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(ArbeitszeiterfassunglibApplication.class);
+    }
+
+    @Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+        servletContext.setInitParameter("com.sun.faces.injectionProvider", "com.sun.faces.vendor.GlassFishInjectionProvider");
+        servletContext.addServlet("FacesServlet", FacesServlet.class).addMapping("*.xhtml");
     }
 
 

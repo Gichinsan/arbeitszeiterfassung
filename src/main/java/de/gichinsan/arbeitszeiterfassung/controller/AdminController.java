@@ -102,7 +102,7 @@ public class AdminController implements Serializable {
         em.setWeeklyWorkinghours(Integer.parseInt(weeklyWorkingshours));
         em.setMaxDailyWorkinghours(Integer.parseInt(maxDailyWorkinghours));
         em.setPausemgmt(Integer.parseInt(pausemgmt));
-        service.save(em);
+        service.saveOrUpdate(em);
 
         Usertbl utbl = new Usertbl();
         Role role = new Role();
@@ -115,7 +115,7 @@ public class AdminController implements Serializable {
         Set<Role> set = Set.of(role);
         utbl.setRoles(set);
         utbl.setEnabled(true);
-        usertblService.createNewUSer(utbl);
+        usertblService.createOrUpdateUser(utbl);
 
         addMessage("Neuer User erstellt! " + username);
         return "/admin";

@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class UserPrincipal implements UserDetails {
 
-    private Usertbl user;
+    private final Usertbl user;
 
     public UserPrincipal(Usertbl user) {
         super();

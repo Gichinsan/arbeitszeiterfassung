@@ -8,6 +8,8 @@ public interface IUsertblService {
 
     UserPrincipal loadUserByUsername(String username);
 
-    Usertbl createNewUSer(Usertbl usertbl);
+    Usertbl createNewUser(Usertbl usertbl);
+
+    Usertbl createOrUpdateUser(Usertbl usertbl);
 
 }

@@ -45,6 +45,8 @@ import java.util.List;
 @Slf4j
 public class WorkhoursController implements Serializable {
 
+    public static final int PAUSE_DEF_VALUE = 40;
+
     private LocalDate arbeitstag;
     private LocalTime startZeit;
     private LocalTime endZeit;
@@ -78,7 +80,7 @@ public class WorkhoursController implements Serializable {
             log.error("Get Employees Pause --> " + pauseDefValue);
 
         } else {
-            pauseDefValue = 50;
+            pauseDefValue = PAUSE_DEF_VALUE;
         }
 
         minTime = LocalTime.of(6, 0);
@@ -95,7 +97,9 @@ public class WorkhoursController implements Serializable {
     }
 
     /**
-     * @return
+     * homepage
+     *
+     * @return String to "index"
      */
     @GetMapping("/")
     public String homepage() {
@@ -103,7 +107,9 @@ public class WorkhoursController implements Serializable {
     }
 
     /**
-     * @return
+     * saveAction
+     *
+     * @return "/overview" in case of success and return to "/index" in case of action needed.
      */
     public String saveAction() {
 
@@ -147,7 +153,9 @@ public class WorkhoursController implements Serializable {
     }
 
     /**
-     * @param summary
+     * addMessage
+     *
+     * @param summary String
      */
     public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
@@ -155,7 +163,9 @@ public class WorkhoursController implements Serializable {
     }
 
     /**
-     * @param summary
+     * addErrorMessage
+     *
+     * @param summary String
      */
     public void addErrorMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, null);

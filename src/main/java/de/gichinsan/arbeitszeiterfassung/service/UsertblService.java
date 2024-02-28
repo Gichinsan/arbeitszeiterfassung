@@ -32,8 +32,21 @@ public class UsertblService implements UserDetailsService, IUsertblService {
     }
 
     @Override
-    public Usertbl createNewUSer(Usertbl usertbl) {
+    public Usertbl createNewUser(Usertbl usertbl) {
         usertblRepository.save(usertbl);
         return usertbl;
+    }
+
+    public Usertbl createOrUpdateUser(Usertbl usertbl) {
+        Usertbl existingUser = usertblRepository.findByUsername(usertbl.getUsername());
+        if (existingUser != null) {
+            Usertbl user = usertblRepository.findByUsername(usertbl.getUsername());
+            usertblRepository.save(existingUser);
+            return existingUser;
+        } else {
+            // User does not exist, create a new user
+            usertblRepository.save(usertbl);
+            return usertbl;
+        }
     }
 }

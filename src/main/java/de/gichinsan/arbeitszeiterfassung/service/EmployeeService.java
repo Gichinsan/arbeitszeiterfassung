@@ -19,8 +19,28 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public boolean save(Employee employee) {
-        repository.save(employee);
-        return true;
+
+        //Check before save
+       // var exists = repository.existsById(employee.getId());
+       // if (exists) {
+            repository.save(employee);
+            return true;
+       // } else {
+       //     return false;
+       // }
+    }
+
+    @Override
+    public boolean saveOrUpdate(Employee employee) {
+        if (employee.getId() != null) {
+            boolean exists = repository.existsById(employee.getId());
+            repository.save(employee);
+            return true;
+        } else {
+
+            repository.save(employee);
+            return true;
+        }
     }
 
     @Override

@@ -103,4 +103,9 @@ public class ArbeitszeiterfassunglibApplication implements WebMvcConfigurer {
         srb.setLoadOnStartup(1);
         return srb;
     }
+
+    @Bean
+    public com.sun.faces.config.ConfigureListener mojarraConfigureListener() {
+        return new com.sun.faces.config.ConfigureListener();
+    }
 }
