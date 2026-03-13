@@ -26,3 +26,7 @@ hs_err_pid*
 .idea/**
 database/**
 target/**
+*/target/**
+/.mvn/
+mvnw
+mvnw.cmd

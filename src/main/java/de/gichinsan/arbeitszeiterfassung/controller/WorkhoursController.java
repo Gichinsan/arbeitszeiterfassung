@@ -123,6 +123,11 @@ public class WorkhoursController implements Serializable {
                 Duration.ofMinutes(diff).minus(mduration).minus(hduration)
         ).toString();
 
+        // Entscheidung über die Verwendung der Werte basierend auf dem Arbeitstype
+        if (worktype == 2 || worktype == 4) {
+            realDiff = "08:00";
+        }
+
         setBerechnung(realDiff);
 
         Workhours wh = new Workhours();
